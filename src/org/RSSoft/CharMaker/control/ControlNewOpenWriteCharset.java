@@ -208,7 +208,7 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
     {
       this.operation = OPERATION_OPEN_XML;
       this.fileController.addObserver(this);
-      FileFilter filter = new FileNameExtensionFilter("XML Font", "fnt", "*");
+      FileFilter filter = new FileNameExtensionFilter("XML Font", "*.fnt", "*.*");
       this.fileController.showOpenDialog(filter);
     }
     else if (e.getSource() == this.buttonWrite_CHeader || e.getSource() == this.itemWrite_CHeader)
@@ -216,17 +216,19 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
       this.operation = OPERATION_WRITE_HEADER;
       this.fileController.setFile(String.format("FONT_%s.h", this.fontSettings.getFontName()));
       this.fileController.addObserver(this);
-      FileFilter filter = new FileNameExtensionFilter("C Header Files", "h");
+      FileFilter filter = new FileNameExtensionFilter("C Header Files", "*.h");
       this.fileController.showSaveDialog(filter);
     }
     else if (e.getSource() == this.itemLoad) {
       this.operation = this.OPERATION_LOAD;
-      FileFilter filter = new FileNameExtensionFilter("CharMakerFile", "cmf", "*");
+      this.fileController.addObserver(this);
+      FileFilter filter = new FileNameExtensionFilter("CharMakerFile", "*.cmf", "*.*");
       this.fileController.showOpenDialog(filter);
     }
     else if (e.getSource() == this.itemSave) {
       this.operation = this.OPERATION_SAVE;
-      FileFilter filter = new FileNameExtensionFilter("CharMakerFile", "cmf", "*");
+      this.fileController.addObserver(this);
+      FileFilter filter = new FileNameExtensionFilter("CharMakerFile", "*.cmf", "*.*");
       this.fileController.showSaveDialog(filter);
     }
   }    

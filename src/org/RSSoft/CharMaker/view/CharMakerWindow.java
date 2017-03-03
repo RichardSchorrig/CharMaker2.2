@@ -80,15 +80,18 @@ public class CharMakerWindow extends javax.swing.JFrame {
     jPanel15 = new javax.swing.JPanel();
     checkBoxMirrorX = new javax.swing.JCheckBox();
     checkBoxMirrorY = new javax.swing.JCheckBox();
+    panelRotationPreview = new javax.swing.JPanel();
+    jPanel16 = new javax.swing.JPanel();
     labelFontName = new javax.swing.JLabel();
     textFieldFontName = new javax.swing.JTextField();
-    checkBoxAlignAtTop = new javax.swing.JCheckBox();
-    checkBoxCharacterPreview = new javax.swing.JCheckBox();
-    panelRotationPreview = new javax.swing.JPanel();
+    jPanel17 = new javax.swing.JPanel();
     radioButtonMSB = new javax.swing.JRadioButton();
     radioButtonLSB = new javax.swing.JRadioButton();
+    jPanel18 = new javax.swing.JPanel();
     radioButtonBigEndian = new javax.swing.JRadioButton();
     radioButtonLittleEndian = new javax.swing.JRadioButton();
+    checkBoxAlignAtTop = new javax.swing.JCheckBox();
+    checkBoxCharacterPreview = new javax.swing.JCheckBox();
     panelCharacters = new javax.swing.JPanel();
     jPanel2 = new javax.swing.JPanel();
     buttonAddChar = new javax.swing.JButton();
@@ -341,19 +344,17 @@ public class CharMakerWindow extends javax.swing.JFrame {
     panelHeaderControl.setLayout(new java.awt.GridBagLayout());
 
     jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-    jPanel13.setLayout(new java.awt.GridBagLayout());
 
     labelDatatype.setText("jLabel2");
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    jPanel13.add(labelDatatype, gridBagConstraints);
+    jPanel13.add(labelDatatype);
 
     comboBoxDatatype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    jPanel13.add(comboBoxDatatype, gridBagConstraints);
+    jPanel13.add(comboBoxDatatype);
 
-    panelHeaderControl.add(jPanel13, new java.awt.GridBagConstraints());
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridwidth = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    panelHeaderControl.add(jPanel13, gridBagConstraints);
 
     jPanel14.setLayout(new java.awt.GridBagLayout());
 
@@ -361,24 +362,28 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 0;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     jPanel14.add(radioButton0, gridBagConstraints);
 
     radioButton90.setText("jRadioButton2");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 1;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     jPanel14.add(radioButton90, gridBagConstraints);
 
     radioButton180.setText("jRadioButton3");
     gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 0;
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 2;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     jPanel14.add(radioButton180, gridBagConstraints);
 
     radioButton270.setText("jRadioButton4");
     gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 1;
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 3;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     jPanel14.add(radioButton270, gridBagConstraints);
 
     gridBagConstraints = new java.awt.GridBagConstraints();
@@ -392,39 +397,90 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 0;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     jPanel15.add(checkBoxMirrorX, gridBagConstraints);
 
     checkBoxMirrorY.setText("jCheckBox2");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 1;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     jPanel15.add(checkBoxMirrorY, gridBagConstraints);
+
+    panelRotationPreview.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    panelRotationPreview.setMinimumSize(new java.awt.Dimension(30, 30));
+    panelRotationPreview.setPreferredSize(new java.awt.Dimension(30, 30));
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 2;
+    gridBagConstraints.gridheight = 2;
+    jPanel15.add(panelRotationPreview, gridBagConstraints);
 
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 1;
     gridBagConstraints.gridy = 1;
     panelHeaderControl.add(jPanel15, gridBagConstraints);
 
+    jPanel16.setLayout(new java.awt.GridBagLayout());
+
     labelFontName.setText("jLabel3");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 2;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+    gridBagConstraints.gridy = 0;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    panelHeaderControl.add(labelFontName, gridBagConstraints);
+    jPanel16.add(labelFontName, gridBagConstraints);
 
     textFieldFontName.setText("jTextField1");
+    textFieldFontName.setMinimumSize(new java.awt.Dimension(100, 22));
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 2;
+    gridBagConstraints.gridy = 0;
     gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    panelHeaderControl.add(textFieldFontName, gridBagConstraints);
+    jPanel16.add(textFieldFontName, gridBagConstraints);
+
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 2;
+    gridBagConstraints.gridwidth = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    panelHeaderControl.add(jPanel16, gridBagConstraints);
+
+    jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder("First Bit"));
+
+    radioButtonMSB.setText("jRadioButton1");
+    jPanel17.add(radioButtonMSB);
+
+    radioButtonLSB.setText("jRadioButton2");
+    jPanel17.add(radioButtonLSB);
+
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 3;
+    gridBagConstraints.gridwidth = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    panelHeaderControl.add(jPanel17, gridBagConstraints);
+
+    jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Endianness"));
+
+    radioButtonBigEndian.setText("jRadioButton3");
+    jPanel18.add(radioButtonBigEndian);
+
+    radioButtonLittleEndian.setText("jRadioButton4");
+    jPanel18.add(radioButtonLittleEndian);
+
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 4;
+    gridBagConstraints.gridwidth = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    panelHeaderControl.add(jPanel18, gridBagConstraints);
 
     checkBoxAlignAtTop.setText("jCheckBox1");
     gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
+    gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 5;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -432,51 +488,11 @@ public class CharMakerWindow extends javax.swing.JFrame {
 
     checkBoxCharacterPreview.setText("jCheckBox1");
     gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
+    gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 6;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
     panelHeaderControl.add(checkBoxCharacterPreview, gridBagConstraints);
-
-    panelRotationPreview.setMinimumSize(new java.awt.Dimension(30, 30));
-    panelRotationPreview.setPreferredSize(new java.awt.Dimension(30, 30));
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 6;
-    gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-    panelHeaderControl.add(panelRotationPreview, gridBagConstraints);
-
-    radioButtonMSB.setText("jRadioButton1");
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 7;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    panelHeaderControl.add(radioButtonMSB, gridBagConstraints);
-
-    radioButtonLSB.setText("jRadioButton2");
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 8;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    panelHeaderControl.add(radioButtonLSB, gridBagConstraints);
-
-    radioButtonBigEndian.setText("jRadioButton3");
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 7;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    panelHeaderControl.add(radioButtonBigEndian, gridBagConstraints);
-
-    radioButtonLittleEndian.setText("jRadioButton4");
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 8;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    panelHeaderControl.add(radioButtonLittleEndian, gridBagConstraints);
 
     tabbedPaneFont.addTab("tab2", panelHeaderControl);
 
@@ -486,6 +502,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
 
     buttonAddChar.setText("jButton3");
     gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
     jPanel2.add(buttonAddChar, gridBagConstraints);
@@ -494,6 +511,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 3;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
     jPanel2.add(buttonEditChar, gridBagConstraints);
@@ -501,6 +519,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     buttonRemoveChar.setText("jButton4");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridy = 1;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
     jPanel2.add(buttonRemoveChar, gridBagConstraints);
@@ -508,6 +527,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     buttonSortChars.setText("jButton5");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridy = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
     jPanel2.add(buttonSortChars, gridBagConstraints);
@@ -516,6 +536,8 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 4;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
     jPanel2.add(buttonCopy, gridBagConstraints);
 
@@ -582,11 +604,11 @@ public class CharMakerWindow extends javax.swing.JFrame {
     panelPreviewFont.setLayout(panelPreviewFontLayout);
     panelPreviewFontLayout.setHorizontalGroup(
       panelPreviewFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 644, Short.MAX_VALUE)
+      .addGap(0, 1164, Short.MAX_VALUE)
     );
     panelPreviewFontLayout.setVerticalGroup(
       panelPreviewFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 176, Short.MAX_VALUE)
+      .addGap(0, 133, Short.MAX_VALUE)
     );
 
     panelPreview.add(panelPreviewFont, java.awt.BorderLayout.CENTER);
@@ -719,6 +741,9 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JPanel jPanel13;
   private javax.swing.JPanel jPanel14;
   private javax.swing.JPanel jPanel15;
+  private javax.swing.JPanel jPanel16;
+  private javax.swing.JPanel jPanel17;
+  private javax.swing.JPanel jPanel18;
   private javax.swing.JPanel jPanel2;
   private javax.swing.JPanel jPanel3;
   private javax.swing.JPanel jPanel4;

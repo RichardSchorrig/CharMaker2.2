@@ -121,7 +121,7 @@ public class ControlShowCharacterDialog extends DialogShowBaseClass implements A
   
   /**
    * set the dialog's labels
-   * @todo: parameter labelcontainer for localization
+   * todo: parameter labelcontainer for localization
    */
   public void setLabels()
   {
