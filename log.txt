@@ -1,80 +1,12 @@
-2017-03-02 | 22:43:06 |  877 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:06 |  972 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |    3 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |   26 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  106 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  132 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  161 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  181 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  204 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  224 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  267 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  338 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  401 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  549 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  575 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  597 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  651 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  698 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  792 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  841 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  869 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  905 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  932 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:07 |  959 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |   38 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |   59 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  111 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  129 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  200 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  225 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  254 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  274 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  295 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  313 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  330 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  350 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  376 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  395 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  437 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  492 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  546 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  599 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  658 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  717 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  780 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  837 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  901 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:08 |  953 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |    1 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |   79 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  102 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  118 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  135 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  151 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  173 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  198 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  237 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  288 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  339 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  375 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  393 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  413 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  461 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  516 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  569 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  618 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  667 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  723 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  772 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  856 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  908 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:09 |  954 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |    9 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |  147 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |  193 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |  229 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |  248 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |  265 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:43:10 |  283 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
-2017-03-02 | 22:48:33 |  874 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2017-07-31 | 01:01:31 |  472 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 6
+2017-07-31 | 01:01:54 |   56 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 7
+2017-07-31 | 01:02:41 |  392 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 9
+2017-07-31 | 01:35:22 |  795 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
+2018-02-13 | 21:45:15 |  877 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-13 | 21:45:56 |  315 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8PX_STANDARD
+2018-02-13 | 22:05:21 |  815 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-13 | 22:05:49 |  133 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
+2018-02-13 | 22:11:00 |  862 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-13 | 22:11:22 |  629 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8px_standard
+2018-02-13 | 22:11:55 |  531 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-13 | 22:12:07 |   12 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet SevenSegment

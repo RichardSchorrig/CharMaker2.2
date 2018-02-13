@@ -151,6 +151,7 @@ public class ControlFileIO extends Observable {
       this.currentPath = fileChooser.getSelectedFile().getParent();
       if (this.settings != null) {
         this.settings.setProperty("PATH", this.currentPath);
+        this.settings.storeToFile();
       }
     }
     this.setChanged();
