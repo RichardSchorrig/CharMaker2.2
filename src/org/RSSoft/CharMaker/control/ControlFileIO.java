@@ -119,7 +119,8 @@ public class ControlFileIO extends Observable {
     if (filter != null)
     {
       this.fileChooser.resetChoosableFileFilters();
-      this.fileChooser.addChoosableFileFilter(filter);
+      this.fileChooser.setFileFilter(filter);
+      this.fileChooser.setAcceptAllFileFilterUsed(true);
     }
     this.approve = this.fileChooser.showOpenDialog(view);
     
@@ -132,11 +133,13 @@ public class ControlFileIO extends Observable {
    */
   public void showSaveDialog(FileFilter filter)
   {
-    //this.fileChooser.setCurrentDirectory(new File(this.currentPath));
+    this.fileChooser.setCurrentDirectory(new File(this.currentPath));
+    this.fileChooser.setSelectedFile(new File(this.currentFile));
     if (filter != null)
     {
       this.fileChooser.resetChoosableFileFilters();
-      this.fileChooser.addChoosableFileFilter(filter);
+      this.fileChooser.setFileFilter(filter);
+      this.fileChooser.setAcceptAllFileFilterUsed(true);
     }
     this.approve = this.fileChooser.showSaveDialog(view);
     
