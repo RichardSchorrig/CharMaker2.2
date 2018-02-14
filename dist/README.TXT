@@ -1,0 +1,56 @@
+CharMaker 2.2
+
+A tool to generate pixel fonts and writing them to C header files.
+
+Distributed under LGPL 2.1
+
+WARNING: some features that are in the GUI don't work, don't rely on those features.
+
+Working features:
+	-create a new character set:
+		-empty character set: click on "New Character Set", select "Empty Character Set"
+		-full character set: ascii values from space (0x20) to tilde (0x7E): 
+		 click on "New Character Set", select "Complete Character Set"
+		-select the height and width in pixels
+			-by selecting "Variable Number of Columns" the character set becomes proportional,
+			 else it is monospaced
+			 
+	-add a character to the set:
+		-click on "add Character", specify the character value, (optional a description)
+			-if font is proportional, select the width of the character
+		-by clicking "Copy Character", the currently selected character is copied (you can specify
+		 the character value)
+	
+	-edit a selected character:
+		-every option that is available by the "New Character" command can later be edited by clicking
+		 "Edit Character"	
+		
+	-manipulating pixels:
+		in the character list: select a character to manipulate
+		in the grid pane, a click with the left mouse button toggles a pixel
+		drag with the right mouse button pressed to create lines (only vertical /horizontal)
+		
+	-setting the created character:
+		to save the pixel art, click "Set Character"
+		
+	-preview characters:
+		-to preview a single character, click on "Show Preview"
+		-to preview more than one character, enter a text in the text field underneath,
+		 click "add"
+		-to clear the preview pane, click "clear"
+		-set the pixel size by selecting the spinner "Preview Pixel Size"
+		
+	-save the character set:
+		-in the file menu, click "Save Character Set", specify a file name
+		
+	-load a saved character set:
+		-in the file menu, click "Load Character Set", select the previous saved file
+		
+	-write header file:
+		-specify some settings:
+			-Data Type (unsigned char, uint8_t, uint16_t...)
+			-Mirror Vertical /Horizontal
+			-First Bit: MSB, LSB
+			-Align at Top
+			-Show Character Preview as Comment
+		-click on "Write Header File", specify a file name

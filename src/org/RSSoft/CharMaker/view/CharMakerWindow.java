@@ -454,7 +454,6 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints.gridx = 1;
     gridBagConstraints.gridy = 1;
     panelHeaderControl.add(jPanel15, gridBagConstraints);
-
     jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
     labelFontName.setText("jLabel3");

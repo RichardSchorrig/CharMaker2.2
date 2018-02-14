@@ -121,7 +121,7 @@ public class ControlFontSettings implements ActionListener
       this.panelRotationPreview.add(box);
       
       this.panelRotationPreview.validate();
-      this.panelRotationPreview.setBackground(Color.white);      
+      this.panelRotationPreview.setBackground(Color.white);
     } catch (IOException ex) {
       RSLogger.getLogger().log(Level.SEVERE, null, ex);
     }
@@ -221,7 +221,7 @@ public class ControlFontSettings implements ActionListener
     fontSettings.mirrorHorizontal = this.checkBoxMirrorHorizontally.isSelected();
     fontSettings.mirrorVertical = this.checkBoxMirrorVertically.isSelected();
     
-    fontSettings.alignment = this.getActiveAlignmentButtonIndex();    
+    fontSettings.alignment = this.getActiveAlignmentButtonIndex();
     fontSettings.rotation = this.getActiveRotationButtonIndex();
     fontSettings.bitOrder = this.getActiveBitOrderButtonIndex();
     fontSettings.endianOrder = this.getActiveEndianOrderButtonIndex();

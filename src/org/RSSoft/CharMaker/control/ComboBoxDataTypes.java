@@ -20,11 +20,11 @@
 
 package org.RSSoft.CharMaker.control;
 
-import charmaker2.control.subsystem.VarBitdepthID;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
+import org.RSSoft.CharMaker.control.subsystem.VarBitdepthID;
 
 /**
  * This class is an extention to the java swing class @link ComboBoxModel

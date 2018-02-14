@@ -334,6 +334,8 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
         this.isVariableWidth = true;
         break;
       }
+    }
+    for (CharacterDescriptor cd : this.characters) {
       cd.addObserver(this);
     }
     this.changed = false;
@@ -352,7 +354,7 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
  * private void readObjectNoData()
  *     throws ObjectStreamException;
 */
-
+  
   @Override
   public void update(Observable o, Object arg) {
     this.changed = true;
