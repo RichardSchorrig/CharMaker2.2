@@ -1,6 +1,0 @@
-2017-03-02 | 23:22:28 |  874 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2017-03-02 | 23:23:37 |   62 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2017-03-02 | 23:23:48 |  255 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2017-03-02 | 23:23:55 |  704 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2017-03-02 | 23:24:59 |  577 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2017-03-02 | 23:28:48 |  688 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 

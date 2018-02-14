@@ -22,3 +22,4 @@
 2018-02-15 | 00:36:27 |   44 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
 2018-02-15 | 00:36:39 |   49 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
 2018-02-15 | 00:36:43 |  834 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
+2018-02-15 | 00:41:21 |  838 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
