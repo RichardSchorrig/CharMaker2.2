@@ -22,6 +22,8 @@ package org.RSSoft.CharMaker.core.character;
 import java.awt.image.Raster;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import javax.swing.AbstractListModel;
 import org.RSSoft.CharMaker.core.DataGrid;
@@ -32,7 +34,7 @@ import org.RSSoft.CharMaker.util.RSLogger;
  * information
  * @author Richard
  */
-public class CharacterSet extends AbstractListModel<String> implements Serializable
+public class CharacterSet extends AbstractListModel<String> implements Serializable, Observer
 {
   static final long serialVersionUID = 25;
   
@@ -41,6 +43,7 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
   private int fontWidth;
   private boolean isVariableWidth;
   private String fontName;
+  private boolean changed;
   
   /**
    * construct a new empty list
@@ -62,7 +65,27 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
     }
     this.fontName = fontName;
     
+    this.changed = false;
+    
     RSLogger.getLogger().log(Level.INFO, String.format("new Character set: %s, height: %d, width: %d", fontName, height, width));
+  }
+  
+  /**
+   * resets the member changed to false.
+   * To be called when serialized to a file.
+   */
+  public void setSaved()
+  {
+    this.changed = false;
+  }
+  
+  /**
+   * returns whether this set was changed.
+   * @return true if recent changes were not saved to a file.
+   */
+  public boolean isChanged()
+  {
+    return this.changed;
   }
   
   /**
@@ -226,7 +249,10 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
     if (this.getCharacterPosition(character) != -1) {
       throw new Exception(String.format("Character %c already in array", character));
     }
-    characters.add(new CharacterDescriptor(grid, description, character));
+    CharacterDescriptor descriptor = new CharacterDescriptor(grid, description, character);
+    descriptor.addObserver(this);
+    characters.add(descriptor);
+    this.changed = true;
     this.fireContentsChanged(this, this.characters.size()-1, this.characters.size());
     RSLogger.getLogger().log(Level.INFO, String.format("new Character: %c", character));
   }
@@ -299,7 +325,7 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
   
   /**
    * validates freshly deserialized data (backwards compapility with old serialized data)
-   * calling is optional when using CharMaker 2.2
+   * also adds observer (this) to all characters
    */
   public void validate() {
     for (CharacterDescriptor cd : this.characters) {
@@ -308,7 +334,9 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
         this.isVariableWidth = true;
         break;
       }
+      cd.addObserver(this);
     }
+    this.changed = false;
   }
   /*
   private void writeObject(java.io.ObjectOutputStream out) throws IOException
@@ -324,4 +352,9 @@ public class CharacterSet extends AbstractListModel<String> implements Serializa
  * private void readObjectNoData()
  *     throws ObjectStreamException;
 */
+
+  @Override
+  public void update(Observable o, Object arg) {
+    this.changed = true;
+  }
 }

@@ -151,7 +151,7 @@ public class HeaderWriter
           }
           pos += 1;
         }
-        if (settings.alignAtTop) {
+        if (settings.alignment == FontSettings.ALIGNMENT_TOP) {
           if ((pos % 8) != 0) {
             if (settings.bitOrder == FontSettings.BITORDER_MSB) {
               value <<= (8 - (pos % 8));

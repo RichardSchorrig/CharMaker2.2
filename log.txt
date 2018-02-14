@@ -1,29 +1,68 @@
-2017-07-31 | 01:01:31 |  472 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 6
-2017-07-31 | 01:01:54 |   56 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 7
-2017-07-31 | 01:02:41 |  392 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 9
-2017-07-31 | 01:35:22 |  795 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2018-02-13 | 21:45:15 |  877 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 21:45:56 |  315 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8PX_STANDARD
-2018-02-13 | 22:05:21 |  815 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:05:49 |  133 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2018-02-13 | 22:11:00 |  862 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:11:22 |  629 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8px_standard
-2018-02-13 | 22:11:55 |  531 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:12:07 |   12 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet SevenSegment
-2018-02-13 | 22:38:17 |  201 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:40:01 |  661 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:41:18 |  299 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:43:39 |  839 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:44:11 |   25 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 
-2018-02-13 | 22:44:44 |  394 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8PX_STANDARD
-2018-02-13 | 22:46:20 |  672 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:46:31 |  764 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8px_standard
-2018-02-13 | 22:48:33 |   95 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:49:14 |  541 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:55:02 |  834 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 22:55:10 |  666 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8PX_STANDARD
-2018-02-13 | 23:02:01 |  555 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2018-02-13 | 23:02:09 |  424 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8px_standard
-2018-02-13 | 23:02:39 |  284 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: font, height: 8, width: 0
-2018-02-13 | 23:02:39 |  284 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2018-02-13 | 23:02:52 |  881 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: a
+2018-02-14 | 18:53:18 |  269 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: s
+2018-02-14 | 18:53:18 |  269 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: t
+2018-02-14 | 18:53:18 |  269 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: u
+2018-02-14 | 18:53:18 |  269 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: v
+2018-02-14 | 18:53:18 |  269 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: w
+2018-02-14 | 18:53:18 |  285 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: x
+2018-02-14 | 18:53:18 |  285 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: y
+2018-02-14 | 18:53:18 |  285 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: z
+2018-02-14 | 18:53:18 |  285 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: {
+2018-02-14 | 18:53:18 |  285 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: |
+2018-02-14 | 18:53:18 |  300 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: }
+2018-02-14 | 18:53:18 |  300 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: ~
+2018-02-14 | 18:53:18 |  316 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
+2018-02-14 | 18:53:54 |  277 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
+2018-02-14 | 18:54:06 |  815 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
+2018-02-14 | 18:54:34 |  346 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
+2018-02-14 | 18:54:39 |  341 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
+2018-02-14 | 19:08:00 |  941 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:08:21 |  420 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 8PX_STANDARD
+2018-02-14 | 19:20:18 |  209 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:31:15 |   35 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:32:25 |  872 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:33:06 |  194 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:45:05 |   99 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:46:12 |  672 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 19:49:56 |  741 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: a
+2018-02-14 | 19:52:13 |  144 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet SevenSegment
+2018-02-14 | 19:59:03 |  737 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:22:27 |  869 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:24:00 |  566 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:24:21 |  808 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:25:42 |  917 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:26:16 |  143 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:26:31 |   62 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:27:34 |   64 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:27:56 |    3 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:32:15 |  567 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:34:24 |  232 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:34:40 |  503 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:35:24 |    7 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:35:40 |  362 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:36:09 |  263 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:36:35 |  877 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:37:02 |  406 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:37:22 |  186 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:39:18 |  398 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:40:17 |  317 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:40:58 |  688 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:44:29 |  722 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:46:44 |   53 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:47:02 |  612 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:47:19 |  510 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:47:34 |  521 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:47:59 |  595 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:48:22 |  462 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:49:38 |   26 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:54:02 |  692 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:54:47 |  756 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 22:56:05 |  970 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 23:25:25 |  890 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2018-02-14 | 23:25:51 |  915 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: font, height: 6, width: 0
+2018-02-14 | 23:25:51 |  915 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
+2018-02-14 | 23:26:07 |  956 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character:  
+2018-02-14 | 23:26:45 |  238 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: !
+2018-02-14 | 23:27:01 |  892 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: "
+2018-02-14 | 23:27:48 |  653 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: #
+2018-02-14 | 23:28:12 |  523 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: $
+2018-02-14 | 23:28:39 |  479 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: %

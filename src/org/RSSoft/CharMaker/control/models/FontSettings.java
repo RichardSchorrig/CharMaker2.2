@@ -36,6 +36,9 @@ public class FontSettings {
   public static final int ENDIANORDER_BIG = 0;
   public static final int ENDIANORDER_LITTLE = 1;
   
+  public static final int ALIGNMENT_TOP = 0;
+  public static final int ALIGNMENT_BOTTOM = 1;
+  
   private final static String DATATYPE_NAME_UCHAR = "unsigned char";
   private final static String DATATYPE_NAME_UINT_8 = "uint8_t";
   private final static String DATATYPE_NAME_UINT_16 = "uint16_t";
@@ -50,9 +53,9 @@ public class FontSettings {
   public int rotation;
   public int bitOrder;
   public int endianOrder;
+  public int alignment;
   public boolean mirrorHorizontal;
   public boolean mirrorVertical;
-  public boolean alignAtTop;
   public boolean commentPreview;
   public String fontName;
   public String dataType;

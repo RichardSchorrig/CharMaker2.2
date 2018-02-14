@@ -116,6 +116,8 @@ public class ControlGrid extends DialogShowBaseClass implements ActionListener, 
     
     this.labelColumns = view.getLabelColumns();
     this.labelRows = view.getLabelRows();
+    
+    this.setAllCharacters(false);
   }
   
   @Override
@@ -211,6 +213,26 @@ public class ControlGrid extends DialogShowBaseClass implements ActionListener, 
   public boolean isCompleteCharacterSet()
   {
     return this.radioButtonAllCharacters.isSelected();
+  }
+  
+  /**
+   * sets the radio buttons to show the new state:
+   * - complete character set (allCharacters true)
+   * - empty character set (allCharacters false)
+   * @param allCharacters the new state of the radio buttons
+   */
+  public void setAllCharacters(boolean allCharacters)
+  {
+    if (allCharacters)
+    {
+      this.radioButtonAllCharacters.setSelected(true);
+      this.radioButtonNoCharacters.setSelected(false);
+    }
+    else
+    {
+      this.radioButtonAllCharacters.setSelected(false);
+      this.radioButtonNoCharacters.setSelected(true);
+    }
   }
 
   @Override

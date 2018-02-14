@@ -20,6 +20,7 @@
 package org.RSSoft.CharMaker.core.character;
 
 import java.io.Serializable;
+import java.util.Observable;
 import org.RSSoft.CharMaker.core.DataGrid;
 
 /**
@@ -27,7 +28,7 @@ import org.RSSoft.CharMaker.core.DataGrid;
  * It contains a DataGrid, the description string, and the actual character
  * @author Richard
  */
-public class CharacterDescriptor implements Serializable
+public class CharacterDescriptor extends Observable implements Serializable
 {
   static final long serialVersionUID = 125;
   
@@ -65,6 +66,8 @@ public class CharacterDescriptor implements Serializable
   public void setGrid(DataGrid grid)
   {
     this.characterGrid.copy(grid);
+    this.setChanged();
+    this.notifyObservers();
   }
   
   /**
@@ -83,6 +86,8 @@ public class CharacterDescriptor implements Serializable
   public void setWidth(int width)
   {
     this.characterGrid = new DataGrid(width, this.characterGrid.getYSize());
+    this.setChanged();
+    this.notifyObservers();
   }
   
   /**
@@ -101,6 +106,8 @@ public class CharacterDescriptor implements Serializable
   public void setDescription(String description)
   {
     this.descriptor = description;
+    this.setChanged();
+    this.notifyObservers();
   }
   
   /**
@@ -119,18 +126,7 @@ public class CharacterDescriptor implements Serializable
   public void setCharacter(char c)
   {
     this.character = c;
+    this.setChanged();
+    this.notifyObservers();
   }
-/*  
-  private void writeObject(java.io.ObjectOutputStream out) throws IOException
-  {
-    out.writeByte(this.character);
-    out.writeInt(this.descriptor.length());
-    out.write(this.descriptor.getBytes());
-    out.write(this.characterGrid)
-  }
- * private void readObject(java.io.ObjectInputStream in)
- *     throws IOException, ClassNotFoundException;
- * private void readObjectNoData()
- *     throws ObjectStreamException;
-*/
 }

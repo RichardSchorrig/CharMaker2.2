@@ -169,6 +169,8 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
     oos.writeObject(this.list.getCurrentCharacterSet());
     oos.flush();
     oos.close();
+    
+    this.list.getCurrentCharacterSet().setSaved();
   }
 
   /**
@@ -194,6 +196,27 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
       RSLogger.getLogger().log(Level.SEVERE, null, cnfe);
     }
   }
+  
+  /**
+   * returns if the current character set was changed
+   * @return true if character set not saved to a file
+   */
+  public boolean isChanged()
+  {
+    return this.list.getCurrentCharacterSet().isChanged();
+  }
+  
+  /**
+   * shows the dialog to save the project to a file
+   */
+  public void showSaveDialog()
+  {
+      this.operation = this.OPERATION_SAVE;
+      this.fileController.addObserver(this);
+      FileFilter filter = new FileNameExtensionFilter("CharMakerFile", "cmfnt", "*");
+      this.fileController.setFile(this.fontSettings.getFontName() + ".cmfnt");
+      this.fileController.showSaveDialog(filter);
+  }
 
   @Override
   public void actionPerformed(ActionEvent e)
@@ -217,7 +240,6 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
       this.fileController.setFile(String.format("FONT_%s.h", this.fontSettings.getFontName()));
       this.fileController.addObserver(this);
       FileFilter filter = new FileNameExtensionFilter("C Header Files", "h");
-      this.fileController.setFile(list.getCurrentCharacterSet().getFontName() + ".h");
       this.fileController.showSaveDialog(filter);
     }
     else if (e.getSource() == this.itemLoad) {
@@ -227,11 +249,7 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
       this.fileController.showOpenDialog(filter);
     }
     else if (e.getSource() == this.itemSave) {
-      this.operation = this.OPERATION_SAVE;
-      this.fileController.addObserver(this);
-      FileFilter filter = new FileNameExtensionFilter("CharMakerFile", "cmfnt", "*");
-      this.fileController.setFile(list.getCurrentCharacterSet().getFontName() + ".cmfnt");
-      this.fileController.showSaveDialog(filter);
+      this.showSaveDialog();
     }
   }    
 

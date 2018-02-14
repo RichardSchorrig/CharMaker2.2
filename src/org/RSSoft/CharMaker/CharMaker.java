@@ -23,6 +23,7 @@ package org.RSSoft.CharMaker;
 import java.io.IOException;
 import java.util.logging.Level;
 import org.RSSoft.CharMaker.control.ControlCharacterSet;
+import org.RSSoft.CharMaker.control.ControlExit;
 import org.RSSoft.CharMaker.control.ControlFileIO;
 import org.RSSoft.CharMaker.control.ControlFontSettings;
 import org.RSSoft.CharMaker.control.ControlGrid;
@@ -63,6 +64,9 @@ public class CharMaker {
       
       ControlNewOpenWriteCharset charsetController = new ControlNewOpenWriteCharset(window, charListController, gridController, fileIO, fontController);
       charsetController.setLabels();
+      
+      ControlExit exitController = new ControlExit(charsetController, window);
+      exitController.setLabels();
       
       ControlPreview preview = new ControlPreview(window, charListController);
       preview.setLabels();

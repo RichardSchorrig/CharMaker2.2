@@ -59,6 +59,13 @@ public class CharMakerWindow extends javax.swing.JFrame {
     jPanel11 = new javax.swing.JPanel();
     dialogButtonGridOK = new javax.swing.JButton();
     dialogButtonGridCancel = new javax.swing.JButton();
+    dialogExit = new javax.swing.JDialog();
+    jPanel20 = new javax.swing.JPanel();
+    LabelSaveBeforeQuit = new javax.swing.JLabel();
+    jPanel21 = new javax.swing.JPanel();
+    buttonExitYes = new javax.swing.JButton();
+    buttonExitNo = new javax.swing.JButton();
+    buttonExitCancel = new javax.swing.JButton();
     jPanel1 = new javax.swing.JPanel();
     panelInput = new javax.swing.JPanel();
     panelFileOperation = new javax.swing.JPanel();
@@ -90,6 +97,9 @@ public class CharMakerWindow extends javax.swing.JFrame {
     jPanel18 = new javax.swing.JPanel();
     radioButtonBigEndian = new javax.swing.JRadioButton();
     radioButtonLittleEndian = new javax.swing.JRadioButton();
+    jPanel19 = new javax.swing.JPanel();
+    radioButtonAlignTop = new javax.swing.JRadioButton();
+    radioButtonAlignBottom = new javax.swing.JRadioButton();
     checkBoxAlignAtTop = new javax.swing.JCheckBox();
     checkBoxCharacterPreview = new javax.swing.JCheckBox();
     panelCharacters = new javax.swing.JPanel();
@@ -319,6 +329,29 @@ public class CharMakerWindow extends javax.swing.JFrame {
 
     dialogNewCharSet.getContentPane().add(jPanel11);
 
+    dialogExit.setMinimumSize(new java.awt.Dimension(450, 120));
+    dialogExit.getContentPane().setLayout(new java.awt.GridLayout(0, 1));
+
+    LabelSaveBeforeQuit.setText("Save before quit?");
+    jPanel20.add(LabelSaveBeforeQuit);
+
+    dialogExit.getContentPane().add(jPanel20);
+
+    java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout();
+    flowLayout1.setAlignOnBaseline(true);
+    jPanel21.setLayout(flowLayout1);
+
+    buttonExitYes.setText("jButton1");
+    jPanel21.add(buttonExitYes);
+
+    buttonExitNo.setText("jButton2");
+    jPanel21.add(buttonExitNo);
+
+    buttonExitCancel.setText("jButton3");
+    jPanel21.add(buttonExitCancel);
+
+    dialogExit.getContentPane().add(jPanel21);
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
     jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
@@ -408,8 +441,9 @@ public class CharMakerWindow extends javax.swing.JFrame {
     jPanel15.add(checkBoxMirrorY, gridBagConstraints);
 
     panelRotationPreview.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-    panelRotationPreview.setMinimumSize(new java.awt.Dimension(30, 30));
-    panelRotationPreview.setPreferredSize(new java.awt.Dimension(30, 30));
+    panelRotationPreview.setMinimumSize(new java.awt.Dimension(40, 40));
+    panelRotationPreview.setPreferredSize(new java.awt.Dimension(40, 40));
+    panelRotationPreview.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 2;
@@ -421,25 +455,14 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints.gridy = 1;
     panelHeaderControl.add(jPanel15, gridBagConstraints);
 
-    jPanel16.setLayout(new java.awt.GridBagLayout());
+    jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
     labelFontName.setText("jLabel3");
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 0;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    jPanel16.add(labelFontName, gridBagConstraints);
+    jPanel16.add(labelFontName);
 
     textFieldFontName.setText("jTextField1");
     textFieldFontName.setMinimumSize(new java.awt.Dimension(100, 22));
-    gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 1;
-    gridBagConstraints.gridy = 0;
-    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-    gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-    gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-    jPanel16.add(textFieldFontName, gridBagConstraints);
+    jPanel16.add(textFieldFontName);
 
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
@@ -478,10 +501,25 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
     panelHeaderControl.add(jPanel18, gridBagConstraints);
 
-    checkBoxAlignAtTop.setText("jCheckBox1");
+    jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder("Alignment"));
+
+    radioButtonAlignTop.setText("jRadioButton1");
+    jPanel19.add(radioButtonAlignTop);
+
+    radioButtonAlignBottom.setText("jRadioButton2");
+    jPanel19.add(radioButtonAlignBottom);
+
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 5;
+    gridBagConstraints.gridwidth = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    panelHeaderControl.add(jPanel19, gridBagConstraints);
+
+    checkBoxAlignAtTop.setText("jCheckBox1");
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 6;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
     panelHeaderControl.add(checkBoxAlignAtTop, gridBagConstraints);
@@ -489,7 +527,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     checkBoxCharacterPreview.setText("jCheckBox1");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 6;
+    gridBagConstraints.gridy = 7;
     gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
     gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
     panelHeaderControl.add(checkBoxCharacterPreview, gridBagConstraints);
@@ -608,7 +646,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     );
     panelPreviewFontLayout.setVerticalGroup(
       panelPreviewFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 133, Short.MAX_VALUE)
+      .addGap(0, 109, Short.MAX_VALUE)
     );
 
     panelPreview.add(panelPreviewFont, java.awt.BorderLayout.CENTER);
@@ -692,11 +730,15 @@ public class CharMakerWindow extends javax.swing.JFrame {
     }
 */
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JLabel LabelSaveBeforeQuit;
   private javax.swing.JButton buttonAddChar;
   private javax.swing.JButton buttonAddText;
   private javax.swing.JButton buttonClearText;
   private javax.swing.JButton buttonCopy;
   private javax.swing.JButton buttonEditChar;
+  private javax.swing.JButton buttonExitCancel;
+  private javax.swing.JButton buttonExitNo;
+  private javax.swing.JButton buttonExitYes;
   private javax.swing.JButton buttonNew;
   private javax.swing.JButton buttonOpen;
   private javax.swing.JButton buttonRemoveChar;
@@ -715,6 +757,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JButton dialogButtonGridCancel;
   private javax.swing.JButton dialogButtonGridOK;
   private javax.swing.JButton dialogButtonOK;
+  private javax.swing.JDialog dialogExit;
   private javax.swing.JLabel dialogLabelCharacter;
   private javax.swing.JLabel dialogLabelCharacterChar;
   private javax.swing.JLabel dialogLabelCharacterHex;
@@ -744,7 +787,10 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JPanel jPanel16;
   private javax.swing.JPanel jPanel17;
   private javax.swing.JPanel jPanel18;
+  private javax.swing.JPanel jPanel19;
   private javax.swing.JPanel jPanel2;
+  private javax.swing.JPanel jPanel20;
+  private javax.swing.JPanel jPanel21;
   private javax.swing.JPanel jPanel3;
   private javax.swing.JPanel jPanel4;
   private javax.swing.JPanel jPanel5;
@@ -783,6 +829,8 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JRadioButton radioButton180;
   private javax.swing.JRadioButton radioButton270;
   private javax.swing.JRadioButton radioButton90;
+  private javax.swing.JRadioButton radioButtonAlignBottom;
+  private javax.swing.JRadioButton radioButtonAlignTop;
   private javax.swing.JRadioButton radioButtonBigEndian;
   private javax.swing.JRadioButton radioButtonLSB;
   private javax.swing.JRadioButton radioButtonLittleEndian;
@@ -1263,5 +1311,54 @@ public class CharMakerWindow extends javax.swing.JFrame {
    */
   public javax.swing.JRadioButton getRadioButtonMSB() {
     return radioButtonMSB;
+  }
+
+  /**
+   * @return the LabelSaveBeforeQuit
+   */
+  public javax.swing.JLabel getLabelSaveBeforeQuit() {
+    return LabelSaveBeforeQuit;
+  }
+
+  /**
+   * @return the buttonExitCancel
+   */
+  public javax.swing.JButton getButtonExitCancel() {
+    return buttonExitCancel;
+  }
+
+  /**
+   * @return the buttonExitNo
+   */
+  public javax.swing.JButton getButtonExitNo() {
+    return buttonExitNo;
+  }
+
+  /**
+   * @return the buttonExitYes
+   */
+  public javax.swing.JButton getButtonExitYes() {
+    return buttonExitYes;
+  }
+
+  /**
+   * @return the dialogExit
+   */
+  public javax.swing.JDialog getDialogExit() {
+    return dialogExit;
+  }
+
+  /**
+   * @return the radioButtonAlignBottom
+   */
+  public javax.swing.JRadioButton getRadioButtonAlignBottom() {
+    return radioButtonAlignBottom;
+  }
+
+  /**
+   * @return the radioButtonAlignTop
+   */
+  public javax.swing.JRadioButton getRadioButtonAlignTop() {
+    return radioButtonAlignTop;
   }
 }

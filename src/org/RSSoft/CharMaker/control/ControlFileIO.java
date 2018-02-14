@@ -52,8 +52,9 @@ public class ControlFileIO extends Observable {
   }
   
   /**
-   * set the path for the file chooser
-   * @param settings 
+   * set the settings for the file chooser
+   * the path selected by the file chooser will be updated in those settings
+   * @param settings the SavedSettings property
    */
   public void setDefaults(SavedSettings settings)
   {

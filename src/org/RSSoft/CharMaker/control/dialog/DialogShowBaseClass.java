@@ -60,6 +60,15 @@ public class DialogShowBaseClass extends Observable {
   }
   
   /**
+   * returns the dialog
+   * @return the JDialog member
+   */
+  public JDialog getDialog()
+  {
+    return this.dialog;
+  }
+  
+  /**
    * shows the dialog set via the constructor
    * @param p the point to show the dialog, can be null
    */
@@ -78,6 +87,15 @@ public class DialogShowBaseClass extends Observable {
   public void showDialog()
   {
     this.showDialog(null);
+  }
+  
+  /**
+   * closes the dialog (sets the dialog invisible)
+   */
+  public void closeDialog()
+  {
+    this.dialog.setVisible(false);
+    this.dialog.setEnabled(false);
   }
   
   /**

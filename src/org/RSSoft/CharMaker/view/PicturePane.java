@@ -19,6 +19,7 @@
  */
 package org.RSSoft.CharMaker.view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -107,6 +108,19 @@ public class PicturePane extends JPanel {
         break;
     }
     this.repaint();
+  }
+  
+  /**
+   * 
+   */
+  @Override
+  public void validate()
+  {
+    Dimension dim = new Dimension(this.picture.getWidth(), this.picture.getHeight());
+    this.setPreferredSize(dim);
+    this.setMaximumSize(dim);
+    this.setMinimumSize(dim);
+    super.validate();
   }
   
   /**
