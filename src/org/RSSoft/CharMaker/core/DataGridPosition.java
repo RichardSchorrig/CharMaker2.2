@@ -25,8 +25,8 @@ package org.RSSoft.CharMaker.core;
  */
 public class DataGridPosition
 {
-  private int x;
-  private int y;
+  public int x;
+  public int y;
   
   public DataGridPosition()
   {
@@ -40,6 +40,12 @@ public class DataGridPosition
     this.y = y;
   }
   
+  public DataGridPosition(DataGridPosition pos)
+  {
+    this.x = pos.x;
+    this.y = pos.y;
+  }
+  
   public int getX()
   {
     return x;
@@ -48,5 +54,14 @@ public class DataGridPosition
   public int getY()
   {
     return y;
+  }
+  
+  public boolean equals(DataGridPosition pos)
+  {
+    if ( (pos.x == this.x) && (pos.y == this.y) )
+    {
+      return true;
+    }
+    return false;
   }
 }

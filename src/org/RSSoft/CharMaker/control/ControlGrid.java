@@ -284,6 +284,17 @@ public class ControlGrid extends DialogShowBaseClass implements ActionListener, 
   public void mouseClicked(MouseEvent e)
   {
 //    grid.fillOneGrid(e.getPoint());
+    /*
+    if (this.rightClickPoint == null)
+    {
+      rightClickPoint = e.getPoint();
+    }
+    else
+    {
+      grid.previewFill(rightClickPoint, e.getPoint());
+      rightClickPoint = e.getPoint();
+    }
+    */
   }
 
   @Override
@@ -303,7 +314,7 @@ public class ControlGrid extends DialogShowBaseClass implements ActionListener, 
   {
     if (this.rightClickPoint != null)
     {
-      grid.fillLine(rightClickPoint, e.getPoint());
+      grid.fill(rightClickPoint, e.getPoint());
     }
     this.rightClickPoint = null;
   }
@@ -332,8 +343,9 @@ public class ControlGrid extends DialogShowBaseClass implements ActionListener, 
 
   @Override
   public void mouseDragged(MouseEvent e) {
-    if (this.rightClickPoint != null) {
-      grid.previewFillLine(rightClickPoint, e.getPoint());
+    if (this.rightClickPoint != null)
+    {
+      grid.previewFill(rightClickPoint, e.getPoint());
     }
   }
 

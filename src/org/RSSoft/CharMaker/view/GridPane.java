@@ -47,6 +47,12 @@ public class GridPane extends JPanel
   private int ySize;
   private double stepSize;
   
+  private DataGridPosition startFillGrid;
+  private DataGridPosition endFillGrid;
+  
+  private DataGridPosition tempPositionX;
+  private DataGridPosition tempPositionY;
+  
   /**
    * construct a new pane with a 8 x 8 grid
    */
@@ -59,6 +65,12 @@ public class GridPane extends JPanel
     this.setOpaque(true);
     
     grid = new DataGrid(8, 8);
+    
+    startFillGrid = new DataGridPosition();
+    endFillGrid = new DataGridPosition();
+    
+    tempPositionX = new DataGridPosition();
+    tempPositionY = new DataGridPosition();
   }
   
   private void calculateDimensions()
@@ -82,7 +94,7 @@ public class GridPane extends JPanel
     this.fillAllGrid((Graphics2D) g);
     this.paintGrid((Graphics2D) g);    
   }
-  
+
   /**
    * sets the grid size to columns, rows
    * @param columns the grid x size
@@ -126,14 +138,24 @@ public class GridPane extends JPanel
   }
   
   /**
-   * toggles one pixel.
-   * If grid is set, the position is cleared, else it is set
-   * @param p the point on the pane to toggle
-   * @return a position of the point toggled in the grid
+   * returns the position as DataGridPosition of the point p
+   * @param p the point to calculate
+   * @return a new DataGridPosition representing p
    */
-  public DataGridPosition fillOneGrid(Point p)
+  private DataGridPosition getPositionFrom(Point p)
   {
-//    this.calculateDimensions();
+    DataGridPosition pos = new DataGridPosition();
+    getPositionFrom(p, pos);
+    return pos;
+  }
+  
+    /**
+   * returns the position as DataGridPosition of the point p
+   * @param p the point to calculate
+   * @param rv an object were the result is saved, no new Object is allocated
+   */
+  private void getPositionFrom(Point p, DataGridPosition rv)
+  {
     int xPos = (int) (p.getX() / stepSize);
     int yPos = (int) (p.getY() / stepSize);
     
@@ -142,9 +164,25 @@ public class GridPane extends JPanel
     
     if (xPos > grid.getYSize())
       xPos = grid.getYSize();
-    DataGridPosition pos = new DataGridPosition(xPos, yPos);
     
-    rectangle.setFrame(xPos*stepSize, yPos*stepSize, stepSize, stepSize);
+    rv.x = xPos;
+    rv.y = yPos;
+    
+    System.out.println(String.format("Position at %d %d", xPos, yPos));
+  }
+  
+  /**
+   * toggles one pixel.
+   * If grid is set, the position is cleared, else it is set
+   * @param p the point on the pane to toggle
+   * @return a position of the point toggled in the grid
+   */
+  public DataGridPosition fillOneGrid(Point p)
+  {
+    this.repaint();
+    DataGridPosition pos = getPositionFrom(p);
+    
+    rectangle.setFrame(pos.getX()*stepSize, pos.getY()*stepSize, stepSize, stepSize);
     Graphics2D g2 = (Graphics2D) this.getGraphics();
     try {
       if (grid.isSetAt(pos))
@@ -167,6 +205,184 @@ public class GridPane extends JPanel
     g2.dispose();
     
     return pos;    
+  }
+  
+  /**
+   * only to be called when startFillGrid and endFillGrid are not null
+   */
+  private void fillLine(boolean permanent)
+  {
+    //this.repaint();
+    if (null == startFillGrid || null == endFillGrid)
+    {
+      return;
+    }
+    
+    boolean set = false;
+    
+    Graphics2D g2 = (Graphics2D) this.getGraphics();
+    try {
+      if (grid.isSetAt(startFillGrid))
+      {
+        g2.setColor(Color.white);
+        set = false;
+      }
+      else
+      {
+        g2.setColor(Color.black);
+        set = true;
+      }
+      g2.fill(rectangle);
+    }
+    catch (Exception ex) {
+      RSLogger.getLogger().log(Level.SEVERE, null, ex);
+    }
+    
+    int dx = endFillGrid.x - startFillGrid.x;
+    int dy = endFillGrid.y - startFillGrid.y;
+    int directionX = dx < 0 ? -1 : 1;
+    int directionY = dy < 0 ? -1 : 1;
+    
+    System.out.println(String.format("dx: %d, dy: %d", dx, dy));
+      
+    boolean startX = true;    
+    int m = 0;
+    
+    dx = dx * directionX;
+    dy = dy * directionY;
+    
+    if ((dx == 0 || dy == 0))
+    {
+      if (dy < dx)
+      {
+        startX = false;
+      }
+    }
+    else if (dx > dy)
+    {
+      m = dx / dy;
+    }
+    else
+    {
+      m = dy / dx;
+      startX = false;
+    }
+    
+    int directionM = m < 0 ? -1 : 1;
+    int x = startFillGrid.x;
+    int y = startFillGrid.y;
+    try
+    {
+      if (startX)
+      {
+        do {
+          int i = 0;
+          do {         
+            rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
+            g2.draw(rectangle);
+            System.out.println(String.format("StartX: drawing at %d %d", x, y));
+            if (permanent)
+            {
+              grid.setAt(x, y, set);
+            }
+            if (i != m)
+            {
+              x += directionX;
+              i += directionM;
+            }
+          } while (i != m);
+
+          if (y != endFillGrid.y)
+          {
+            y += directionY;
+          }
+        } while (y != endFillGrid.y);
+      }    
+      else
+      {
+        do {
+          int i = 0;
+          do {          
+            rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
+            g2.draw(rectangle);          
+            System.out.println(String.format("StartY: drawing at %d %d", x, y));
+            if (permanent)
+            {
+              grid.setAt(x, y, set);
+            }
+            if (i != m)
+            {
+              y += directionY;
+              i += directionM;
+            }
+          } while (i != m);
+
+          if (x != endFillGrid.x)
+          {
+            x += directionX;
+          }
+        } while (x != endFillGrid.x);
+      }
+    } catch (Exception ex)
+    {
+      
+    }
+    
+    this.paintGrid(g2);
+    g2.dispose();
+  }
+  
+  public void previewFill(Point start, Point end)
+  {
+    boolean refresh = false;
+    
+    getPositionFrom(start, tempPositionX);
+    getPositionFrom(end, tempPositionY);
+    
+    if (!startFillGrid.equals(tempPositionX) || !endFillGrid.equals(tempPositionY))
+    {
+      startFillGrid = new DataGridPosition(tempPositionX);
+      endFillGrid = new DataGridPosition(tempPositionY);
+      refresh = true;
+    }
+/*    
+    if (null == startFillGrid)
+    {
+      System.out.println("new start point");
+      getPositionFrom(start, tempPosition);
+      startFillGrid = new DataGridPosition(tempPosition);
+      refresh = true;
+    }
+    if (null == endFillGrid)
+    {
+      System.out.println("new end point");
+      getPositionFrom(end, tempPosition);
+      endFillGrid = new DataGridPosition(tempPosition);
+      refresh = true;
+    }
+  
+    if (!refresh)
+    {
+      getPositionFrom(end, tempPosition);
+      if (!endFillGrid.equals(tempPosition))
+      {
+        endFillGrid = new DataGridPosition(tempPosition);
+        refresh = true;
+      }
+    }
+*/    
+    if (refresh)
+    {
+      fillLine(false);
+    }    
+  }
+  
+  public void fill(Point start, Point end)
+  {
+    getPositionFrom(start, startFillGrid);
+    getPositionFrom(end, endFillGrid);
+    
+    fillLine(true);
   }
   
   public void previewFillLine(Point start, Point end) {
@@ -231,7 +447,7 @@ public class GridPane extends JPanel
     this.paintGrid(g2);
     g2.dispose();
   }
-  
+/*  
   public DataGridPosition fillLine(Point start, Point end) {
     int xPosStart = (int) (start.getX() / stepSize);
     int yPosStart = (int) (start.getY() / stepSize);
@@ -314,7 +530,7 @@ public class GridPane extends JPanel
     g2.dispose();
     return pos;
   }
-  
+*/  
   private void fillAllGrid(Graphics2D g2)
   {
     int xPos = 0;
