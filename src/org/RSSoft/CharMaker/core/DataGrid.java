@@ -79,6 +79,44 @@ public class DataGrid implements Serializable
   }
   
   /**
+   * sets all points in the grid.
+   */
+  public void setAll()
+  {
+    int x = 0;
+    int y = 0;
+    for (boolean arr[] : grid)
+    {      
+      for (boolean b : arr)
+      {
+        this.grid[x][y] = true;
+        y += 1;
+      }
+      y = 0;
+      x += 1;
+    }
+  }
+  
+  /**
+   * invert all points in the grid.
+   */
+  public void invertAll()
+  {
+        int x = 0;
+    int y = 0;
+    for (boolean arr[] : grid)
+    {      
+      for (boolean b : arr)
+      {
+        this.grid[x][y] = !this.grid[x][y];
+        y += 1;
+      }
+      y = 0;
+      x += 1;
+    }
+  }
+  
+  /**
    * returns the width of the grid
    * @return the width of the grid
    */
@@ -108,7 +146,7 @@ public class DataGrid implements Serializable
   /**
    * or another grid to this grid (the pixels set in the other grid will 
    * be set in this grid)
-   * @param anotherGrid the other grid to add.
+   * @param anotherGrid the other grid to logical or.
    */
   public void orGrid(DataGrid anotherGrid)
   {
@@ -119,6 +157,7 @@ public class DataGrid implements Serializable
     {
       for (int y = 0; y < dimY; y += 1)
       {
+        System.out.println(String.format("Setting grid at %d %d to %s", x, y, anotherGrid.grid[x][y] ? "true" : "false"));
         this.grid[x][y] |= anotherGrid.grid[x][y];
       }
     }
@@ -127,7 +166,7 @@ public class DataGrid implements Serializable
   /**
    * ands another grid to this grid (the pixels set in this grid and in
    * the other grid will be set in this grid, intersect)
-   * @param anotherGrid the other grid to add.
+   * @param anotherGrid the other grid to logical and.
    */
   public void andGrid(DataGrid anotherGrid)
   {

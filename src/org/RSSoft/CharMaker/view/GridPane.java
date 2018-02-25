@@ -26,6 +26,7 @@ import java.awt.Point;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import org.RSSoft.CharMaker.core.DataGrid;
 import org.RSSoft.CharMaker.core.DataGridPosition;
@@ -98,12 +99,7 @@ public class GridPane extends JPanel
   {
     super.paintComponent(g);
     this.calculateDimensions();
-//    this.fillAllGrid((Graphics2D) g, false);
-
-    if (!preview)
-    {
-      this.previewGrid.copy(grid);
-    }
+    this.fillAllGrid((Graphics2D) g, false);
     this.fillAllGrid((Graphics2D) g, true);
     this.paintGrid((Graphics2D) g);
   }
@@ -215,30 +211,17 @@ public class GridPane extends JPanel
    */
   private boolean fillLine()
   {   
-    previewGrid.copy(grid);
+    previewGrid.clearGrid();
     
-    boolean set = false;
+    boolean set = true;
+    try {
+      set = !grid.isSetAt(startFillGrid);
+    } catch (Exception ex) {
+    }
     
     Graphics2D g2 = (Graphics2D) this.getGraphics();
     this.paintComponent(g2);
-    
-    try {
-      if (grid.isSetAt(startFillGrid))
-      {
-        g2.setColor(Color.white);
-        set = false;
-      }
-      else
-      {
-        g2.setColor(Color.black);
-        set = true;
-      }
-      g2.fill(rectangle);
-    }
-    catch (Exception ex) {
-      RSLogger.getLogger().log(Level.SEVERE, null, ex);
-    }
-    
+   
     int dx = endFillGrid.x - startFillGrid.x;
     int dy = endFillGrid.y - startFillGrid.y;
     int directionX = dx < 0 ? -1 : 1;
@@ -285,9 +268,7 @@ public class GridPane extends JPanel
           int i = 0;
           while (i != m)
           {
-            rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
-            g2.draw(rectangle);
-            previewGrid.setAt(x, y, set);
+            previewGrid.setAt(x, y, true);
 
             x += directionX;
             i += directionM;
@@ -306,9 +287,7 @@ public class GridPane extends JPanel
           int i = 0;
           while (i != m)
           {
-            rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
-            g2.draw(rectangle);
-            previewGrid.setAt(x, y, set);
+            previewGrid.setAt(x, y, true);
 
             y += directionY;
             i += directionM;
@@ -325,9 +304,8 @@ public class GridPane extends JPanel
     {
       
     }
-    g2.dispose();
-    //this.repaint();
     this.paintComponent(g2, true);
+    g2.dispose();    
     
     return set;
   }
@@ -351,7 +329,7 @@ public class GridPane extends JPanel
     getPositionFrom(end, endFillGrid);
     
     boolean add = this.fillLine();
-    /*
+    
     if (add)
     {
       grid.addGrid(previewGrid);
@@ -360,9 +338,9 @@ public class GridPane extends JPanel
     {
       grid.substractGrid(previewGrid);
     }
-    */
-    grid.copy(previewGrid);
-    //previewGrid.clearGrid();
+    
+    //grid.copy(previewGrid);
+    previewGrid.clearGrid();
     
     this.repaint();
   }
@@ -448,7 +426,14 @@ public class GridPane extends JPanel
  
   private void fillAllGrid(Graphics2D g2, boolean preview)
   {
-    g2.setColor(Color.black);
+    if (preview)
+    {
+      g2.setColor(Color.CYAN);
+    }
+    else
+    {
+      g2.setColor(Color.black);
+    }
     
     int xPos = 0;
     int yPos = 0;
