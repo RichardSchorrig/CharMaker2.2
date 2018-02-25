@@ -71,6 +71,14 @@ public class DataGrid implements Serializable
   }
   
   /**
+   * clears all set points in the grid.
+   */
+  public void clearGrid()
+  {
+    grid = new boolean[xSize][ySize];
+  }
+  
+  /**
    * returns the width of the grid
    * @return the width of the grid
    */
@@ -95,6 +103,73 @@ public class DataGrid implements Serializable
   public boolean[][] getArray()
   {
     return grid;
+  }
+  
+  /**
+   * or another grid to this grid (the pixels set in the other grid will 
+   * be set in this grid)
+   * @param anotherGrid the other grid to add.
+   */
+  public void orGrid(DataGrid anotherGrid)
+  {
+    int dimX = this.xSize < anotherGrid.xSize ? this.xSize : anotherGrid.xSize;
+    int dimY = this.ySize < anotherGrid.ySize ? this.ySize : anotherGrid.ySize;
+    
+    for (int x = 0; x < dimX; x += 1)
+    {
+      for (int y = 0; y < dimY; y += 1)
+      {
+        this.grid[x][y] |= anotherGrid.grid[x][y];
+      }
+    }
+  }
+  
+  /**
+   * ands another grid to this grid (the pixels set in this grid and in
+   * the other grid will be set in this grid, intersect)
+   * @param anotherGrid the other grid to add.
+   */
+  public void andGrid(DataGrid anotherGrid)
+  {
+    int dimX = this.xSize < anotherGrid.xSize ? this.xSize : anotherGrid.xSize;
+    int dimY = this.ySize < anotherGrid.ySize ? this.ySize : anotherGrid.ySize;
+    
+    for (int x = 0; x < dimX; x += 1)
+    {
+      for (int y = 0; y < dimY; y += 1)
+      {
+        this.grid[x][y] &= anotherGrid.grid[x][y];
+      }
+    }
+  }
+  
+  /**
+   * adds (logical or) another grid to this grid (the pixels set in the
+   * other grid will be set in this grid)
+   * @param anotherGrid the other grid to add.
+   */
+  public void addGrid(DataGrid anotherGrid)
+  {
+    this.orGrid(anotherGrid);
+  }
+
+  /**
+   * substracts another grid to this grid (the pixels set in the
+   * other grid will be unset in this grid)
+   * @param anotherGrid the other grid to add.
+   */
+  public void substractGrid(DataGrid anotherGrid)
+  {
+    int dimX = this.xSize < anotherGrid.xSize ? this.xSize : anotherGrid.xSize;
+    int dimY = this.ySize < anotherGrid.ySize ? this.ySize : anotherGrid.ySize;
+    
+    for (int x = 0; x < dimX; x += 1)
+    {
+      for (int y = 0; y < dimY; y += 1)
+      {
+        this.grid[x][y] &= !anotherGrid.grid[x][y];
+      }
+    }
   }
   
   /**

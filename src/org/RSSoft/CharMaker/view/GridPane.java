@@ -42,6 +42,7 @@ public class GridPane extends JPanel
   private Rectangle2D.Double rectangle;
   
   private DataGrid grid;
+  private DataGrid previewGrid;
   
   private int xSize;
   private int ySize;
@@ -65,6 +66,7 @@ public class GridPane extends JPanel
     this.setOpaque(true);
     
     grid = new DataGrid(8, 8);
+    previewGrid = new DataGrid(8, 8);
     
     startFillGrid = new DataGridPosition();
     endFillGrid = new DataGridPosition();
@@ -89,10 +91,21 @@ public class GridPane extends JPanel
   @Override
   public void paintComponent(Graphics g)
   {
+    paintComponent(g, false);
+  }
+  
+  public void paintComponent(Graphics g, boolean preview)
+  {
     super.paintComponent(g);
     this.calculateDimensions();
-    this.fillAllGrid((Graphics2D) g);
-    this.paintGrid((Graphics2D) g);    
+//    this.fillAllGrid((Graphics2D) g, false);
+
+    if (!preview)
+    {
+      this.previewGrid.copy(grid);
+    }
+    this.fillAllGrid((Graphics2D) g, true);
+    this.paintGrid((Graphics2D) g);
   }
 
   /**
@@ -112,6 +125,7 @@ public class GridPane extends JPanel
       col = 1;
     }
     grid.changeGrid(col, rows);
+    previewGrid.changeGrid(col, rows);
     
     this.repaint();
     
@@ -133,6 +147,7 @@ public class GridPane extends JPanel
   public void setGrid(DataGrid dGrid)
   {
     this.grid.copy(dGrid);
+    this.previewGrid.changeGrid(grid.getXSize(), grid.getYSize());
     
     this.repaint();
   }
@@ -167,21 +182,10 @@ public class GridPane extends JPanel
     
     rv.x = xPos;
     rv.y = yPos;
-    
-    System.out.println(String.format("Position at %d %d", xPos, yPos));
   }
   
-  /**
-   * toggles one pixel.
-   * If grid is set, the position is cleared, else it is set
-   * @param p the point on the pane to toggle
-   * @return a position of the point toggled in the grid
-   */
-  public DataGridPosition fillOneGrid(Point p)
-  {
-    this.repaint();
-    DataGridPosition pos = getPositionFrom(p);
-    
+  private void fillOneGrid(DataGridPosition pos)
+  {    
     rectangle.setFrame(pos.getX()*stepSize, pos.getY()*stepSize, stepSize, stepSize);
     Graphics2D g2 = (Graphics2D) this.getGraphics();
     try {
@@ -202,25 +206,22 @@ public class GridPane extends JPanel
       RSLogger.getLogger().log(Level.WARNING, null, ex);
     }
     this.paintGrid(g2);
+    this.paintComponent(g2);
     g2.dispose();
-    
-    return pos;    
   }
   
   /**
    * only to be called when startFillGrid and endFillGrid are not null
    */
-  private void fillLine(boolean permanent)
-  {
-    //this.repaint();
-    if (null == startFillGrid || null == endFillGrid)
-    {
-      return;
-    }
+  private boolean fillLine()
+  {   
+    previewGrid.copy(grid);
     
     boolean set = false;
     
     Graphics2D g2 = (Graphics2D) this.getGraphics();
+    this.paintComponent(g2);
+    
     try {
       if (grid.isSetAt(startFillGrid))
       {
@@ -243,99 +244,96 @@ public class GridPane extends JPanel
     int directionX = dx < 0 ? -1 : 1;
     int directionY = dy < 0 ? -1 : 1;
     
-    System.out.println(String.format("dx: %d, dy: %d", dx, dy));
+    dx = dx * directionX + 1;
+    dy = dy * directionY + 1;
       
     boolean startX = true;    
     int m = 0;
-    
-    dx = dx * directionX;
-    dy = dy * directionY;
     
     if ((dx == 0 || dy == 0))
     {
       if (dy < dx)
       {
+        startX = true;
+        m = dx;
+      }
+      else
+      {
+        m = dy;
         startX = false;
       }
     }
     else if (dx > dy)
     {
-      m = dx / dy;
+      m = (dx) / (dy);
     }
     else
     {
-      m = dy / dx;
+      m = (dy) / (dx);
       startX = false;
     }
     
     int directionM = m < 0 ? -1 : 1;
     int x = startFillGrid.x;
     int y = startFillGrid.y;
+    
     try
     {
       if (startX)
       {
         do {
           int i = 0;
-          do {         
+          while (i != m)
+          {
             rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
             g2.draw(rectangle);
-            System.out.println(String.format("StartX: drawing at %d %d", x, y));
-            if (permanent)
-            {
-              grid.setAt(x, y, set);
-            }
-            if (i != m)
-            {
-              x += directionX;
-              i += directionM;
-            }
-          } while (i != m);
+            previewGrid.setAt(x, y, set);
 
-          if (y != endFillGrid.y)
-          {
-            y += directionY;
+            x += directionX;
+            i += directionM;
           }
-        } while (y != endFillGrid.y);
+          
+          y += directionY;
+          if (dy != 0)
+          {
+            dy -= 1;
+          }
+        } while (dy != 0);
       }    
       else
       {
         do {
           int i = 0;
-          do {          
-            rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
-            g2.draw(rectangle);          
-            System.out.println(String.format("StartY: drawing at %d %d", x, y));
-            if (permanent)
-            {
-              grid.setAt(x, y, set);
-            }
-            if (i != m)
-            {
-              y += directionY;
-              i += directionM;
-            }
-          } while (i != m);
-
-          if (x != endFillGrid.x)
+          while (i != m)
           {
-            x += directionX;
+            rectangle.setFrame(x*stepSize, y*stepSize, stepSize, stepSize);
+            g2.draw(rectangle);
+            previewGrid.setAt(x, y, set);
+
+            y += directionY;
+            i += directionM;
           }
-        } while (x != endFillGrid.x);
+
+          x += directionX;
+          if (dx != 0)
+          {
+            dx -= 1;
+          }
+        } while (dx != 0);
       }
     } catch (Exception ex)
     {
       
     }
-    
-    this.paintGrid(g2);
     g2.dispose();
+    //this.repaint();
+    this.paintComponent(g2, true);
+    
+    return set;
   }
   
   public void previewFill(Point start, Point end)
-  {
-    boolean refresh = false;
-    
+  {    
     getPositionFrom(start, tempPositionX);
     getPositionFrom(end, tempPositionY);
     
@@ -343,38 +341,8 @@ public class GridPane extends JPanel
     {
       startFillGrid = new DataGridPosition(tempPositionX);
       endFillGrid = new DataGridPosition(tempPositionY);
-      refresh = true;
-    }
-/*    
-    if (null == startFillGrid)
-    {
-      System.out.println("new start point");
-      getPositionFrom(start, tempPosition);
-      startFillGrid = new DataGridPosition(tempPosition);
-      refresh = true;
-    }
-    if (null == endFillGrid)
-    {
-      System.out.println("new end point");
-      getPositionFrom(end, tempPosition);
-      endFillGrid = new DataGridPosition(tempPosition);
-      refresh = true;
-    }
-  
-    if (!refresh)
-    {
-      getPositionFrom(end, tempPosition);
-      if (!endFillGrid.equals(tempPosition))
-      {
-        endFillGrid = new DataGridPosition(tempPosition);
-        refresh = true;
-      }
-    }
-*/    
-    if (refresh)
-    {
-      fillLine(false);
-    }    
+      fillLine();
+    }      
   }
   
   public void fill(Point start, Point end)
@@ -382,7 +350,37 @@ public class GridPane extends JPanel
     getPositionFrom(start, startFillGrid);
     getPositionFrom(end, endFillGrid);
     
-    fillLine(true);
+    boolean add = this.fillLine();
+    /*
+    if (add)
+    {
+      grid.addGrid(previewGrid);
+    }
+    else
+    {
+      grid.substractGrid(previewGrid);
+    }
+    */
+    grid.copy(previewGrid);
+    //previewGrid.clearGrid();
+    
+    this.repaint();
+  }
+  
+    /**
+   * toggles one pixel.
+   * If grid is set, the position is cleared, else it is set
+   * @param p the point on the pane to toggle
+   * @return a position of the point toggled in the grid
+   */
+  public DataGridPosition fillOneGrid(Point p)
+  {
+    this.repaint();
+    DataGridPosition pos = getPositionFrom(p);
+   
+    fillOneGrid(pos);
+    
+    return pos;    
   }
   
   public void previewFillLine(Point start, Point end) {
@@ -447,109 +445,29 @@ public class GridPane extends JPanel
     this.paintGrid(g2);
     g2.dispose();
   }
-/*  
-  public DataGridPosition fillLine(Point start, Point end) {
-    int xPosStart = (int) (start.getX() / stepSize);
-    int yPosStart = (int) (start.getY() / stepSize);
-    
-    int xPosEnd = (int) (end.getX() / stepSize);
-    int yPosEnd = (int) (end.getY() / stepSize);
-    
-    if (xPosStart > grid.getXSize())
-      xPosStart = grid.getXSize();
-    
-    if (yPosStart > grid.getYSize())
-      yPosStart = grid.getYSize();
-    
-    if (xPosEnd > grid.getXSize())
-      xPosEnd = grid.getXSize();
-    
-    if (yPosEnd > grid.getYSize())
-      yPosEnd = grid.getYSize();
-    
-    DataGridPosition pos = new DataGridPosition(xPosStart, yPosStart);
-    
-    boolean set = false;
-    
-    Graphics2D g2 = (Graphics2D) this.getGraphics();
-    try {
-      if (grid.isSetAt(pos))
-      {
-        g2.setColor(Color.white);
-        grid.unSetAt(pos);
-        set = false;
-      }
-      else
-      {
-        g2.setColor(Color.black);
-        grid.setAt(pos);
-        set = true;
-      }
-      g2.fill(rectangle);
-    }
-    catch (Exception ex) {
-      RSLogger.getLogger().log(Level.WARNING, null, ex);
-    }
-    
-    int x = xPosStart < xPosEnd ? xPosEnd - xPosStart : xPosStart - xPosEnd;
-    int y = yPosStart < yPosEnd ? yPosEnd - yPosStart : yPosStart - yPosEnd;
-    
-    int xStart = xPosStart < xPosEnd ? xPosStart : xPosEnd;
-    int yStart = yPosStart < yPosEnd ? yPosStart : yPosEnd;
-    
-    try {
-      if (x >= y) {
-        for (int i=0; i<x; i+=1) {
-          rectangle.setFrame((xStart+i)*stepSize, yPosStart*stepSize, stepSize, stepSize);
-          g2.draw(rectangle);
-          if (set) {
-            grid.setAt(xStart+i, yPosStart);
-          }
-          else {
-            grid.unSetAt(xStart+i, yPosStart);
-          }
-        }
-      }
-      else {
-        for (int i=0; i<y; i+=1) {
-          rectangle.setFrame(xPosStart*stepSize, (yStart+i)*stepSize, stepSize, stepSize);
-          g2.draw(rectangle);
-          if (set) {
-            grid.setAt(xPosStart, yStart+i);
-          }
-          else {
-            grid.unSetAt(xPosStart, yStart+i);
-          }
-        }
-      }
-    }
-    catch (Exception ex) {
-      RSLogger.getLogger().log(Level.WARNING, null, ex);
-    }
-    this.paintGrid(g2);
-    g2.dispose();
-    return pos;
-  }
-*/  
-  private void fillAllGrid(Graphics2D g2)
+ 
+  private void fillAllGrid(Graphics2D g2, boolean preview)
   {
+    g2.setColor(Color.black);
+    
     int xPos = 0;
     int yPos = 0;
-    for (boolean arr[] : grid.getArray())
+    DataGrid g = grid;
+    if (preview)
+    {
+      g = previewGrid;
+    }
+    for (boolean arr[] : g.getArray())
     {      
       for (boolean b : arr)
       {
         if (b)
         {
-          g2.setColor(Color.black);
+          rectangle.setFrame(stepSize*xPos, stepSize*yPos, stepSize, stepSize);
+          g2.fill(rectangle);
+          g2.draw(rectangle);
         }
-        else
-        {
-          g2.setColor(Color.white);          
-        }
-        rectangle.setFrame(stepSize*xPos, stepSize*yPos, stepSize, stepSize);
-        g2.fill(rectangle);
-        g2.draw(rectangle);
+
         yPos += 1;
       }
       xPos += 1;
