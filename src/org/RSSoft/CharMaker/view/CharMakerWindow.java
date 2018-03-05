@@ -73,7 +73,11 @@ public class CharMakerWindow extends javax.swing.JFrame {
     buttonNew = new javax.swing.JButton();
     buttonSave = new javax.swing.JButton();
     panelEditorInput = new javax.swing.JPanel();
+    jPanel22 = new javax.swing.JPanel();
     panelEditor = new javax.swing.JPanel();
+    jPanel23 = new javax.swing.JPanel();
+    panelButtonsMove = new javax.swing.JPanel();
+    panelButtonsTransform = new javax.swing.JPanel();
     tabbedPaneFont = new javax.swing.JTabbedPane();
     panelHeaderControl = new javax.swing.JPanel();
     jPanel13 = new javax.swing.JPanel();
@@ -371,8 +375,27 @@ public class CharMakerWindow extends javax.swing.JFrame {
 
     panelEditorInput.setLayout(new java.awt.GridLayout(1, 0));
 
+    jPanel22.setLayout(new java.awt.GridLayout());
+
+    panelEditor.setMinimumSize(new java.awt.Dimension(200, 200));
+    panelEditor.setPreferredSize(new java.awt.Dimension(200, 200));
     panelEditor.setLayout(new java.awt.GridLayout(1, 0));
-    panelEditorInput.add(panelEditor);
+    jPanel22.add(panelEditor);
+
+    jPanel23.setLayout(new java.awt.GridBagLayout());
+
+    panelButtonsMove.setLayout(new java.awt.GridBagLayout());
+    jPanel23.add(panelButtonsMove, new java.awt.GridBagConstraints());
+
+    panelButtonsTransform.setLayout(new java.awt.GridBagLayout());
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 2;
+    jPanel23.add(panelButtonsTransform, gridBagConstraints);
+
+    jPanel22.add(jPanel23);
+
+    panelEditorInput.add(jPanel22);
 
     panelHeaderControl.setLayout(new java.awt.GridBagLayout());
 
@@ -454,6 +477,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     gridBagConstraints.gridx = 1;
     gridBagConstraints.gridy = 1;
     panelHeaderControl.add(jPanel15, gridBagConstraints);
+
     jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
     labelFontName.setText("jLabel3");
@@ -790,6 +814,8 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JPanel jPanel2;
   private javax.swing.JPanel jPanel20;
   private javax.swing.JPanel jPanel21;
+  private javax.swing.JPanel jPanel22;
+  private javax.swing.JPanel jPanel23;
   private javax.swing.JPanel jPanel3;
   private javax.swing.JPanel jPanel4;
   private javax.swing.JPanel jPanel5;
@@ -815,6 +841,8 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JMenuItem menuItemQuit;
   private javax.swing.JMenuItem menuItemSaveCharacterSet;
   private javax.swing.JMenuItem menuItemWriteHeader;
+  private javax.swing.JPanel panelButtonsMove;
+  private javax.swing.JPanel panelButtonsTransform;
   private javax.swing.JPanel panelCharacters;
   private javax.swing.JPanel panelEditor;
   private javax.swing.JPanel panelEditorInput;
@@ -1359,5 +1387,23 @@ public class CharMakerWindow extends javax.swing.JFrame {
    */
   public javax.swing.JRadioButton getRadioButtonAlignTop() {
     return radioButtonAlignTop;
+  }
+
+
+
+
+
+  /**
+   * @return the panelButtonsMove
+   */
+  public javax.swing.JPanel getPanelButtonsMove() {
+    return panelButtonsMove;
+  }
+
+  /**
+   * @return the panelButtonsTransform
+   */
+  public javax.swing.JPanel getPanelButtonsTransform() {
+    return panelButtonsTransform;
   }
 }

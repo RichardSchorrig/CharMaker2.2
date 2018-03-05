@@ -27,6 +27,7 @@ import org.RSSoft.CharMaker.control.ControlExit;
 import org.RSSoft.CharMaker.control.ControlFileIO;
 import org.RSSoft.CharMaker.control.ControlFontSettings;
 import org.RSSoft.CharMaker.control.ControlGrid;
+import org.RSSoft.CharMaker.control.ControlGridTransform;
 import org.RSSoft.CharMaker.control.ControlNewOpenWriteCharset;
 import org.RSSoft.CharMaker.control.ControlPreview;
 import org.RSSoft.CharMaker.util.RSLogger;
@@ -49,6 +50,9 @@ public class CharMaker {
       SavedSettings settings = new SavedSettings("settings");
       ControlGrid gridController = new ControlGrid(window);
       gridController.setLabels();
+      
+      ControlGridTransform transformController = new ControlGridTransform(window, gridController);
+      transformController.setLabels();
       
       ControlFileIO fileIO = new ControlFileIO(window);
       fileIO.setDefaults(settings);

@@ -356,6 +356,35 @@ public class DataGrid implements Serializable
     return dgrid;
   }
   
+  /**
+   * paste a selection into the grid on the given position.
+   * if the selection and the offset won't fit into the grid, the rest is skipped.
+   * @param selection the data grid to paste, is not changed
+   * @param xOffset the offset in x direction
+   * @param yOffset the offset in y direction
+   * @throws java.lang.Exception
+   */
+  public void paste(DataGrid selection, int xOffset, int yOffset) throws Exception
+  {
+    if (xOffset >= this.xSize || yOffset >= this.ySize)
+      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xOffset, yOffset, this.xSize-1, this.ySize-1));
+    
+    int xEnd = selection.xSize + xOffset > xSize ? xSize - xOffset : selection.xSize;
+    int yEnd = selection.ySize + yOffset > ySize ? ySize - yOffset : selection.ySize;
+    
+    for (int x = 0; x < xEnd; x += 1)
+    {
+      for (int y = 0; y < yEnd; y += 1)
+      {
+        grid[x + xOffset][y + yOffset] = selection.grid[x][y];
+      }
+    }
+  }
+  
+  /**
+   * copies the entire grid
+   * @return a new object containing the same data
+   */
   public DataGrid copy()
   {
     DataGrid newgrid = new DataGrid(0, 0);
@@ -363,6 +392,10 @@ public class DataGrid implements Serializable
     return newgrid;
   }
   
+  /**
+   * copies the entire grid
+   * @param anotherGrid an allocated object where the data is pasted into
+   */
   public void copy(DataGrid anotherGrid)
   {
     this.xSize = anotherGrid.xSize;
@@ -380,6 +413,117 @@ public class DataGrid implements Serializable
       y = 0;
       x += 1;
     }
+  }
+  
+  /**
+   * copies an area into the given oject
+   * @param selection the object where the data is copied into
+   * @param xOffset the offset in x direction
+   * @param yOffset the offset in y direction
+   * @param cut true if the selection should be cleared after the copy, false if
+   *             the selection remains
+   * @throws Exception 
+   */
+  public void copy(DataGrid selection, int xOffset, int yOffset, boolean cut) throws Exception
+  {
+    if (xOffset >= this.xSize || yOffset >= this.ySize)
+      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xOffset, yOffset, this.xSize-1, this.ySize-1));
+    
+    int xEnd = selection.xSize + xOffset > xSize ? xSize - xOffset : selection.xSize;
+    int yEnd = selection.ySize + yOffset > ySize ? ySize - yOffset : selection.ySize;    
+    
+    for (int x = 0; x < xEnd; x += 1)
+    {
+      for (int y = 0; y < yEnd; y += 1)
+      {
+        selection.grid[x][y] = grid[x + xOffset][y + yOffset];
+        if (cut)
+        {
+          grid[x + xOffset][y + yOffset] = false;
+        }
+      }
+    }
+  }
+  
+  /**
+   * copies an area of the grid and pastes the data into a new object. 
+   * the new object has the size given by the start and end parameter
+   * @param xStart the x start point
+   * @param yStart the y start point
+   * @param xEnd the x end point
+   * @param yEnd the y end point
+   * @param cut true if the selection should be cleared after the copy, false if
+   *             the selection remains
+   * @return a new object containing the selection
+   * @throws Exception 
+   */
+  public DataGrid copy(int xStart, int yStart, int xEnd, int yEnd, boolean cut) throws Exception
+  {
+    if (xStart >= this.xSize || yStart >= this.ySize)
+      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xStart, yStart, this.xSize-1, this.ySize-1));
+    if (xEnd >= this.xSize || yEnd >= this.ySize)
+      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xEnd, yEnd, this.xSize-1, this.ySize-1));
+    
+    if (xStart > xEnd)
+    {
+      int t = xEnd;
+      xEnd = xStart;
+      xStart = t;
+    }
+    if (yStart > yEnd)
+    {
+      int t = yEnd;
+      yEnd = yStart;
+      yStart = t;
+    }
+    
+    DataGrid selection = new DataGrid(xEnd - xStart, yEnd - yStart);
+    
+    copy(selection, xStart, yStart, cut);
+    
+    return selection;
+  }
+  
+  public void manipulate(int rotation, boolean mirrorHorizontal, boolean mirrorVertical) throws Exception
+  {
+    DataGrid newGrid;
+    if (rotation == GridIterator.ROTATION_0 || rotation == GridIterator.ROTATION_180)
+    {
+      newGrid = new DataGrid(xSize, ySize);
+    }
+    else
+    {
+      newGrid = new DataGrid(ySize, xSize);
+    }
+    
+    rotation = (rotation + 1) % 4;
+    GridIterator it = new GridIterator(this, rotation, mirrorHorizontal, mirrorVertical);
+    
+    int x = 0;
+    int y = 0;
+    for (it.x = it.xBegin; it.conditionX(); it.x += it.xDirection)
+    {
+      for (it.y = it.yBegin; it.conditionY(); it.y += it.yDirection)
+      {
+        newGrid.grid[x][y] = grid[it.getColumnIterator()][it.getRowIterator()];
+        System.out.println(String.format("newGrid[%d][%d] = oldGrid[%d][%d]", x, y, it.getColumnIterator(), it.getRowIterator()));
+        x += 1;
+      }
+      x = 0;
+      y += 1;
+    }
+    
+    copy(newGrid);
+  }
+  
+  public void rotate(int rotation) throws Exception
+  {
+    manipulate(rotation, false, false);
+  }
+  
+  public void mirror(boolean mirrorHorizontal, boolean mirrorVertical) throws Exception
+  {
+    manipulate(GridIterator.ROTATION_0, mirrorHorizontal, mirrorVertical);
   }
   
   public int getSizeInBytes() {

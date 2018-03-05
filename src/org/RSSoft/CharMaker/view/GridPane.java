@@ -19,6 +19,7 @@
  */
 package org.RSSoft.CharMaker.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,7 +27,6 @@ import java.awt.Point;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import org.RSSoft.CharMaker.core.DataGrid;
 import org.RSSoft.CharMaker.core.DataGridPosition;
@@ -170,11 +170,11 @@ public class GridPane extends JPanel
     int xPos = (int) (p.getX() / stepSize);
     int yPos = (int) (p.getY() / stepSize);
     
-    if (xPos > grid.getXSize())
-      xPos = grid.getXSize();
+    if (xPos >= grid.getXSize())
+      xPos = grid.getXSize() - 1;
     
-    if (xPos > grid.getYSize())
-      xPos = grid.getYSize();
+    if (yPos >= grid.getYSize())
+      yPos = grid.getYSize() - 1;
     
     rv.x = xPos;
     rv.y = yPos;
@@ -320,6 +320,7 @@ public class GridPane extends JPanel
       startFillGrid = new DataGridPosition(tempPositionX);
       endFillGrid = new DataGridPosition(tempPositionY);
       fillLine();
+      drawSelection();
     }      
   }
   
@@ -458,6 +459,36 @@ public class GridPane extends JPanel
       xPos += 1;
       yPos = 0;
     }
+  }
+  
+  private void drawSelection()
+  {
+    Graphics2D g2 = (Graphics2D) this.getGraphics();
+    //this.paintComponent(g2);
+    
+    g2.setColor(Color.RED);
+    g2.setStroke(new BasicStroke(4));
+    
+    Line2D.Double selectionLine = new Line2D.Double();
+    
+    double xStart, yStart, xEnd, yEnd;
+    xStart = (startFillGrid.x < endFillGrid.x ? startFillGrid.x : endFillGrid.x) * stepSize;
+    yStart = (startFillGrid.y < endFillGrid.y ? startFillGrid.y : endFillGrid.y) * stepSize;
+    xEnd = ((startFillGrid.x > endFillGrid.x ? startFillGrid.x : endFillGrid.x) + 1) * stepSize;
+    yEnd = ((startFillGrid.y > endFillGrid.y ? startFillGrid.y : endFillGrid.y) + 1) * stepSize;
+    
+    System.out.println(String.format("Selection at %f %f - %f %f", xStart, yStart, xEnd, yEnd));
+    
+    selectionLine.setLine(xStart, yStart, xEnd, yStart);
+    g2.draw(selectionLine);
+    selectionLine.setLine(xEnd, yStart, xEnd, yEnd);
+    g2.draw(selectionLine);    
+    selectionLine.setLine(xEnd, yEnd, xStart, yEnd);
+    g2.draw(selectionLine);
+    selectionLine.setLine(xStart, yEnd, xStart, yStart);
+    g2.draw(selectionLine);
+    
+    g2.dispose();
   }
   
   private void paintGrid(Graphics2D g2)
