@@ -78,6 +78,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     jPanel23 = new javax.swing.JPanel();
     panelButtonsMove = new javax.swing.JPanel();
     panelButtonsTransform = new javax.swing.JPanel();
+    panelDrawSelect = new javax.swing.JPanel();
     tabbedPaneFont = new javax.swing.JTabbedPane();
     panelHeaderControl = new javax.swing.JPanel();
     jPanel13 = new javax.swing.JPanel();
@@ -373,25 +374,35 @@ public class CharMakerWindow extends javax.swing.JFrame {
 
     panelInput.add(panelFileOperation, java.awt.BorderLayout.PAGE_END);
 
-    panelEditorInput.setLayout(new java.awt.GridLayout(1, 0));
+    panelEditorInput.setLayout(new java.awt.GridLayout());
 
-    jPanel22.setLayout(new java.awt.GridLayout());
+    jPanel22.setLayout(new javax.swing.BoxLayout(jPanel22, javax.swing.BoxLayout.LINE_AXIS));
 
     panelEditor.setMinimumSize(new java.awt.Dimension(200, 200));
-    panelEditor.setPreferredSize(new java.awt.Dimension(200, 200));
+    panelEditor.setPreferredSize(new java.awt.Dimension(400, 400));
     panelEditor.setLayout(new java.awt.GridLayout(1, 0));
     jPanel22.add(panelEditor);
 
     jPanel23.setLayout(new java.awt.GridBagLayout());
 
     panelButtonsMove.setLayout(new java.awt.GridBagLayout());
-    jPanel23.add(panelButtonsMove, new java.awt.GridBagConstraints());
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 1;
+    gridBagConstraints.gridy = 0;
+    jPanel23.add(panelButtonsMove, gridBagConstraints);
 
     panelButtonsTransform.setLayout(new java.awt.GridBagLayout());
     gridBagConstraints = new java.awt.GridBagConstraints();
-    gridBagConstraints.gridx = 0;
-    gridBagConstraints.gridy = 2;
+    gridBagConstraints.gridx = 1;
+    gridBagConstraints.gridy = 1;
     jPanel23.add(panelButtonsTransform, gridBagConstraints);
+
+    panelDrawSelect.setLayout(new javax.swing.BoxLayout(panelDrawSelect, javax.swing.BoxLayout.Y_AXIS));
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 0;
+    gridBagConstraints.gridheight = 2;
+    jPanel23.add(panelDrawSelect, gridBagConstraints);
 
     jPanel22.add(jPanel23);
 
@@ -669,7 +680,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
     );
     panelPreviewFontLayout.setVerticalGroup(
       panelPreviewFontLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 109, Short.MAX_VALUE)
+      .addGap(0, 308, Short.MAX_VALUE)
     );
 
     panelPreview.add(panelPreviewFont, java.awt.BorderLayout.CENTER);
@@ -844,6 +855,7 @@ public class CharMakerWindow extends javax.swing.JFrame {
   private javax.swing.JPanel panelButtonsMove;
   private javax.swing.JPanel panelButtonsTransform;
   private javax.swing.JPanel panelCharacters;
+  private javax.swing.JPanel panelDrawSelect;
   private javax.swing.JPanel panelEditor;
   private javax.swing.JPanel panelEditorInput;
   private javax.swing.JPanel panelFileOperation;
@@ -1405,5 +1417,12 @@ public class CharMakerWindow extends javax.swing.JFrame {
    */
   public javax.swing.JPanel getPanelButtonsTransform() {
     return panelButtonsTransform;
+  }
+
+  /**
+   * @return the panelDrawSelect
+   */
+  public javax.swing.JPanel getPanelDrawSelect() {
+    return panelDrawSelect;
   }
 }

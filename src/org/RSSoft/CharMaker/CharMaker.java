@@ -53,6 +53,7 @@ public class CharMaker {
       
       ControlGridTransform transformController = new ControlGridTransform(window, gridController);
       transformController.setLabels();
+      transformController.setActive(false);
       
       ControlFileIO fileIO = new ControlFileIO(window);
       fileIO.setDefaults(settings);

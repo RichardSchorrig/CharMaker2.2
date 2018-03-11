@@ -18,11 +18,11 @@
  */
 package org.RSSoft.CharMaker.control;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -50,6 +50,8 @@ public class ControlGridTransform implements ActionListener
   private final PictureButton buttonRotateLeft;
   private final PictureButton buttonRotateRight;
   
+  private final PictureButton[] buttons;
+  
   public ControlGridTransform(CharMakerWindow view, ControlGrid gridController) throws IOException
   {
     gridpane = gridController.getGridPane();
@@ -59,46 +61,64 @@ public class ControlGridTransform implements ActionListener
     
     GridBagConstraints c = new GridBagConstraints();
     
+    buttons = new PictureButton[8];
+    
     buttonMoveUp = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/up.png"));
+    buttonMoveUp.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/up_inactive.png"));
     c.gridx = 1;
     c.gridy = 0;
     panelMoveButtons.add(buttonMoveUp, c);
+    buttons[0] = buttonMoveUp;
     
     buttonMoveDown = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/down.png"));
+    buttonMoveDown.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/down_inactive.png"));
     c.gridx = 1;
     c.gridy = 2;
     panelMoveButtons.add(buttonMoveDown, c);
+    buttons[1] = buttonMoveDown;
     
     buttonMoveLeft = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/left.png"));
+    buttonMoveLeft.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/left_inactive.png"));
     c.gridx = 0;
     c.gridy = 1;
     panelMoveButtons.add(buttonMoveLeft, c);
+    buttons[2] = buttonMoveLeft;
     
     buttonMoveRight = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/right.png"));
+    buttonMoveRight.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/right_inactive.png"));
     c.gridx = 2;
     c.gridy = 1;
     panelMoveButtons.add(buttonMoveRight, c);
+    buttons[3] = buttonMoveRight;
     
     
     buttonMirrorH = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/MirrorH.png"));
+    buttonMirrorH.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/MirrorH_inactive.png"));
     c.gridx = 1;
     c.gridy = 0;
     panelTransformButtons.add(buttonMirrorH, c);
+    buttons[4] = buttonMirrorH;
     
     buttonMirrorV = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/MirrorV.png"));
+    buttonMirrorV.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/MirrorV_inactive.png"));
     c.gridx = 1;
     c.gridy = 2;
     panelTransformButtons.add(buttonMirrorV, c);
+    buttons[5] = buttonMirrorV;
     
     buttonRotateLeft = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/RotateLeft.png"));
+    buttonRotateLeft.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/RotateLeft_inactive.png"));
     c.gridx = 0;
     c.gridy = 1;
     panelTransformButtons.add(buttonRotateLeft, c);
+    buttons[6] = buttonRotateLeft;
     
     buttonRotateRight = new PictureButton(this.getClass().getClassLoader().getResourceAsStream("media/RotateRight.png"));
+    buttonRotateRight.setInactivePicture(this.getClass().getClassLoader().getResourceAsStream("media/RotateRight_inactive.png"));
     c.gridx = 2;
     c.gridy = 1;
     panelTransformButtons.add(buttonRotateRight, c);
+    buttons[7] = buttonRotateRight;
     
     buttonMoveUp.addActionListener(this);
     buttonMoveRight.addActionListener(this);
@@ -122,6 +142,14 @@ public class ControlGridTransform implements ActionListener
     buttonMirrorV.set("Mirror vertically");
     buttonRotateLeft.set("Rotate left");
     buttonRotateRight.set("Rotate right");
+  }
+  
+  public void setActive(boolean activate)
+  {
+    for (PictureButton b : buttons)
+    {
+      b.setEnabled(activate);
+    }
   }
 
   @Override

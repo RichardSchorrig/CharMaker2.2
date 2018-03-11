@@ -34,15 +34,28 @@ import javax.swing.JButton;
 public class PictureButton extends JButton {
   
   private final BufferedImage picture;
+  private BufferedImage inactivePicture;
   
   public PictureButton(String fileName) throws IOException
   {
     this.picture = ImageIO.read(new File(fileName));
+    this.inactivePicture = null;
   }
   
   public PictureButton(InputStream is) throws IOException
   {
     this.picture = ImageIO.read(is);
+    this.inactivePicture = null;
+  }
+  
+  public void setInactivePicture(String fileName) throws IOException
+  {
+    this.inactivePicture = ImageIO.read(new File(fileName));
+  }
+  
+  public void setInactivePicture(InputStream is) throws IOException
+  {
+    this.inactivePicture = ImageIO.read(is);
   }
   
   public void set(String tooltip)
@@ -50,6 +63,10 @@ public class PictureButton extends JButton {
     this.setToolTipText(tooltip);
     this.setText("");
     this.setIcon(new ImageIcon(picture));
+    if (null != inactivePicture)
+    {
+      this.setDisabledIcon(new ImageIcon(inactivePicture));
+    }
     
     Dimension d = new Dimension(picture.getWidth() + 2, picture.getHeight() + 2);
     
