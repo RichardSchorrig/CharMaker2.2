@@ -29,12 +29,47 @@ import org.RSSoft.CharMaker.core.DataGridPosition;
  * @author Richard
  */
 public class DrawActionStraightLine implements DrawAction {
+  
+  private double stepSize;
+  private Rectangle2D.Double rectangle;
+  private Graphics2D g;
+  
+  private interface Draw {
+    public void draw(int x, int y);
+  }
+  
+  private class DrawReal implements Draw {
+    @Override
+    public void draw(int x, int y) {
+      rectangle.setFrame(stepSize*x, stepSize*y, stepSize, stepSize);
+      g.fill(rectangle);
+      g.draw(rectangle);
+    }    
+  }
+  
+  private class DrawFake implements Draw {
+    @Override
+    public void draw(int x, int y) {}
+  }
 
   @Override
   public void fill(DataGrid grid, DataGridPosition start, DataGridPosition end, Graphics2D g, Color c, double stepSize) {
     
-    Rectangle2D.Double rectangle = new Rectangle2D.Double();
-    g.setColor(c);
+    rectangle = new Rectangle2D.Double();
+    this.g = g;
+    this.stepSize = stepSize;
+    
+    Draw draw;
+    
+    if (null != g)
+    {
+      g.setColor(c);
+      draw = new DrawReal();
+    }
+    else
+    {
+      draw = new DrawFake();
+    }
     
     int dx = end.x - start.x;
     int dy = end.y - start.y;
@@ -84,9 +119,7 @@ public class DrawActionStraightLine implements DrawAction {
           {
             grid.setAt(x, y, true);
             
-            rectangle.setFrame(stepSize*x, stepSize*y, stepSize, stepSize);
-            g.fill(rectangle);
-            g.draw(rectangle);
+            draw.draw(x, y);
 
             x += directionX;
             i += directionM;
@@ -107,9 +140,7 @@ public class DrawActionStraightLine implements DrawAction {
           {
             grid.setAt(x, y, true);
             
-            rectangle.setFrame(stepSize*x, stepSize*y, stepSize, stepSize);
-            g.fill(rectangle);
-            g.draw(rectangle);
+            draw.draw(x, y);
 
             y += directionY;
             i += directionM;
@@ -126,6 +157,11 @@ public class DrawActionStraightLine implements DrawAction {
     {
       
     }
+  }
+
+  @Override
+  public void fill(DataGrid grid, DataGridPosition start, DataGridPosition end) {
+    fill(grid, start, end, null, null, 0);
   }
   
 }

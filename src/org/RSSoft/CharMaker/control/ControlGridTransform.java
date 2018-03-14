@@ -157,19 +157,19 @@ public class ControlGridTransform implements ActionListener
     try {
       if (e.getSource().equals(buttonMirrorH))
       {
-        gridpane.getGrid().mirror(true, false);
+        gridpane.getCopyGrid().mirror(true, false);
       }
       else if (e.getSource().equals(buttonMirrorV))
       {
-        gridpane.getGrid().mirror(false, true);
+        gridpane.getCopyGrid().mirror(false, true);
       }
       else if (e.getSource().equals(buttonRotateLeft))
       {
-        gridpane.getGrid().rotate(GridIterator.ROTATION_90);
+        gridpane.getCopyGrid().rotate(GridIterator.ROTATION_90);
       }
       else if (e.getSource().equals(buttonRotateRight))
       {
-        gridpane.getGrid().rotate(GridIterator.ROTATION_270);
+        gridpane.getCopyGrid().rotate(GridIterator.ROTATION_270);
       }
     } catch (Exception ex) {
       Logger.getLogger(ControlGridTransform.class.getName()).log(Level.SEVERE, null, ex);

@@ -20,9 +20,14 @@
 
 package org.RSSoft.CharMaker;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.logging.Level;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.RSSoft.CharMaker.control.ControlCharacterSet;
+import org.RSSoft.CharMaker.control.ControlEditorMode;
 import org.RSSoft.CharMaker.control.ControlExit;
 import org.RSSoft.CharMaker.control.ControlFileIO;
 import org.RSSoft.CharMaker.control.ControlFontSettings;
@@ -38,7 +43,9 @@ import org.RSSoft.CharMaker.view.CharMakerWindow;
  * an application to design pixel fonts and exporting them as c header files
  * @author richard
  */
-public class CharMaker {
+public class CharMaker implements KeyListener {
+  
+  private ControlGrid gridController;
   
   /**
    * runs the application CharMaker
@@ -46,14 +53,22 @@ public class CharMaker {
   public CharMaker()
   {
     try {
+      
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      
       CharMakerWindow window = new CharMakerWindow();
       SavedSettings settings = new SavedSettings("settings");
-      ControlGrid gridController = new ControlGrid(window);
+      gridController = new ControlGrid(window);
       gridController.setLabels();
       
       ControlGridTransform transformController = new ControlGridTransform(window, gridController);
       transformController.setLabels();
       transformController.setActive(false);
+      
+      ControlEditorMode modeController = new ControlEditorMode(window, gridController.getGridPane());
+      modeController.setLabels();
+      
+      gridController.getGridPane().addTransformControl(transformController);
       
       ControlFileIO fileIO = new ControlFileIO(window);
       fileIO.setDefaults(settings);
@@ -81,8 +96,17 @@ public class CharMaker {
 //      io.setLabels();
       
       window.setVisible(true);
+      window.addKeyListener(this);
       
     } catch (IOException ex) {
+      RSLogger.getLogger().log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+      RSLogger.getLogger().log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+      RSLogger.getLogger().log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+      RSLogger.getLogger().log(Level.SEVERE, null, ex);
+    } catch (UnsupportedLookAndFeelException ex) {
       RSLogger.getLogger().log(Level.SEVERE, null, ex);
     }
     
@@ -94,5 +118,28 @@ public class CharMaker {
     public static void main(String[] args) {
         new CharMaker();
     }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+    if (e.isControlDown())
+    {
+      if (Character.toLowerCase(e.getKeyChar()) == 'c')
+      {
+        gridController.getGridPane().copy();
+      }
+      if (Character.toLowerCase(e.getKeyChar()) == 'v')
+      {
+        gridController.getGridPane().paste();
+      }
+    }
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
+  }
     
 }

@@ -27,9 +27,11 @@ import java.awt.Point;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import org.RSSoft.CharMaker.control.ControlGridTransform;
 import org.RSSoft.CharMaker.control.drawaction.DrawAction;
+import org.RSSoft.CharMaker.control.drawaction.DrawActionSelect;
 import org.RSSoft.CharMaker.control.drawaction.DrawActionStraightLine;
 import org.RSSoft.CharMaker.core.DataGrid;
 import org.RSSoft.CharMaker.core.DataGridPosition;
@@ -47,6 +49,7 @@ public class GridPane extends JPanel
   
   private DataGrid grid;
   private DataGrid previewGrid;
+  private DataGrid copyGrid;
   
   private int xSize;
   private int ySize;
@@ -61,6 +64,8 @@ public class GridPane extends JPanel
   private ControlGridTransform transformController;
   
   private DrawAction currentDrawMode;
+  private boolean selectMode;
+  private boolean selectionValid;
   
   /**
    * construct a new pane with a 8 x 8 grid
@@ -85,11 +90,66 @@ public class GridPane extends JPanel
     this.transformController = null;
     
     this.currentDrawMode = new DrawActionStraightLine();
+    this.selectMode = false;
+    this.selectionValid = false;
+  }
+  
+  public void setSelectMode(boolean selectMode)
+  {
+    this.selectMode = selectMode;
+    
+    if (!selectMode)
+    {
+      selectionValid = false;
+      transformController.setActive(false);
+      repaint();
+    }
+  }
+  
+  public void copy(boolean cut)
+  {
+    if (selectMode && selectionValid)
+    {
+      System.out.println("trying to copy / cut");
+      try {      
+        copyGrid = grid.copy(startFillGrid.x, startFillGrid.y, endFillGrid.x, endFillGrid.y, cut);
+      } catch (Exception ex) {
+        RSLogger.getLogger().log(Level.SEVERE, null, ex);
+      }
+    }
+  }
+  
+  public void cut()
+  {
+    copy(true);
+  }
+  
+  public void copy()
+  {
+    copy(false);
+  }
+  
+  public void paste()
+  {
+    if (selectMode && selectionValid)
+    {
+      System.out.println("trying to paste");
+      try {
+        grid.paste(copyGrid, startFillGrid.x, startFillGrid.y);
+      } catch (Exception ex) {
+        RSLogger.getLogger().log(Level.SEVERE, null, ex);
+      }
+    }
   }
   
   public void addTransformControl(ControlGridTransform transformController)
   {
     this.transformController = transformController;
+  }
+  
+  public void setDrawAction(DrawAction action)
+  {
+    currentDrawMode = action;
   }
   
   private void calculateDimensions()
@@ -104,24 +164,24 @@ public class GridPane extends JPanel
       xSize = (int) (stepSize * grid.getXSize());
     }
   }
-
+  
   @Override
   public void paintComponent(Graphics g)
   {
-    paintComponent(g, false);
-  }
-  
-  public void paintComponent(Graphics g, boolean preview)
-  {
     super.paintComponent(g);
     this.calculateDimensions();
-    this.fillAllGrid((Graphics2D) g, false);
     
-    if (preview)
-    {
-      this.fillAllGrid((Graphics2D) g, true);
-    }
     this.paintGrid((Graphics2D) g);
+    if (selectionValid)
+    {
+      this.fillAllGrid((Graphics2D) g);
+      this.fillAllCopyGrid((Graphics2D) g);
+      this.fill((Graphics2D) g);
+    }
+    else
+    {
+      this.fillAllGrid((Graphics2D) g);
+    }
   }
 
   /**
@@ -154,6 +214,11 @@ public class GridPane extends JPanel
   public DataGrid getGrid()
   {
     return this.grid;
+  }
+  
+  public DataGrid getCopyGrid()
+  {
+    return this.copyGrid;
   }
   
   /**
@@ -229,7 +294,7 @@ public class GridPane extends JPanel
   /**
    * only to be called when startFillGrid and endFillGrid are not null
    */
-  private boolean fill()
+  private boolean fill(Graphics2D g2)
   {   
     previewGrid.clearGrid();
     
@@ -239,29 +304,33 @@ public class GridPane extends JPanel
     } catch (Exception ex) {
     }
     
-    Graphics2D g2 = (Graphics2D) this.getGraphics();
-    this.paintComponent(g2);
-    
     Color c = Color.CYAN;
-    if (set)
+    if (set || selectMode)
     {
       c = Color.RED;
     }
-    currentDrawMode.fill(previewGrid, startFillGrid, endFillGrid, g2, c, stepSize);
-    g2.dispose();    
+    currentDrawMode.fill(previewGrid, startFillGrid, endFillGrid, g2, c, stepSize);  
     
     return set;
   }
   
-  public void select(Point start, Point end)
+  private boolean fill()
   {
-    getPositionFrom(start, startFillGrid);
-    getPositionFrom(end, endFillGrid);
-    
-    if (null != this.transformController)
+    return fill(null);
+  }
+  
+  private void select()
+  {
+    if (!startFillGrid.equals(endFillGrid))
     {
-      drawSelection();
+      DrawActionSelect.calculateStartEnd(startFillGrid, endFillGrid);
+      selectionValid = true;
       transformController.setActive(true);
+      this.cut();
+    }
+    else
+    {
+      selectionValid = false;
     }
   }
   
@@ -274,15 +343,17 @@ public class GridPane extends JPanel
     {
       startFillGrid = new DataGridPosition(tempStart);
       endFillGrid = new DataGridPosition(tempEnd);
-      fill();
+      
+      Graphics2D g2 = (Graphics2D) this.getGraphics();
+      this.paintComponent(g2);
+      
+      fill(g2);
+      g2.dispose();  
     }      
   }
   
-  public void fill(Point start, Point end)
+  private void paintGrid()
   {
-    getPositionFrom(start, startFillGrid);
-    getPositionFrom(end, endFillGrid);
-    
     boolean add = this.fill();
     
     if (add)
@@ -294,10 +365,24 @@ public class GridPane extends JPanel
       grid.substractGrid(previewGrid);
     }
     
-    //grid.copy(previewGrid);
     previewGrid.clearGrid();
     
     this.repaint();
+  }
+  
+  public void fill(Point start, Point end)
+  {
+    getPositionFrom(start, startFillGrid);
+    getPositionFrom(end, endFillGrid);
+    
+    if (selectMode)
+    {
+      select();
+    }
+    else
+    {
+      paintGrid();
+    }
   }
   
     /**
@@ -316,25 +401,13 @@ public class GridPane extends JPanel
     return pos;    
   }
  
-  private void fillAllGrid(Graphics2D g2, boolean preview)
+  private void fillAllGrid(Graphics2D g2)
   {
-    if (preview)
-    {
-      g2.setColor(Color.CYAN);
-    }
-    else
-    {
-      g2.setColor(Color.black);
-    }
+    g2.setColor(Color.black);
     
     int xPos = 0;
     int yPos = 0;
-    DataGrid g = grid;
-    if (preview)
-    {
-      g = previewGrid;
-    }
-    for (boolean arr[] : g.getArray())
+    for (boolean arr[] : grid.getArray())
     {      
       for (boolean b : arr)
       {
@@ -352,34 +425,28 @@ public class GridPane extends JPanel
     }
   }
   
-  private void drawSelection()
+  private void fillAllCopyGrid(Graphics2D g2)
   {
-    Graphics2D g2 = (Graphics2D) this.getGraphics();
-    //this.paintComponent(g2);
+    g2.setColor(Color.black);
     
-    g2.setColor(Color.RED);
-    g2.setStroke(new BasicStroke(4));
-    
-    Line2D.Double selectionLine = new Line2D.Double();
-    
-    double xStart, yStart, xEnd, yEnd;
-    xStart = (startFillGrid.x < endFillGrid.x ? startFillGrid.x : endFillGrid.x) * stepSize;
-    yStart = (startFillGrid.y < endFillGrid.y ? startFillGrid.y : endFillGrid.y) * stepSize;
-    xEnd = ((startFillGrid.x > endFillGrid.x ? startFillGrid.x : endFillGrid.x) + 1) * stepSize;
-    yEnd = ((startFillGrid.y > endFillGrid.y ? startFillGrid.y : endFillGrid.y) + 1) * stepSize;
-    
-    System.out.println(String.format("Selection at %f %f - %f %f", xStart, yStart, xEnd, yEnd));
-    
-    selectionLine.setLine(xStart, yStart, xEnd, yStart);
-    g2.draw(selectionLine);
-    selectionLine.setLine(xEnd, yStart, xEnd, yEnd);
-    g2.draw(selectionLine);    
-    selectionLine.setLine(xEnd, yEnd, xStart, yEnd);
-    g2.draw(selectionLine);
-    selectionLine.setLine(xStart, yEnd, xStart, yStart);
-    g2.draw(selectionLine);
-    
-    g2.dispose();
+    int xPos = 0;
+    int yPos = 0;
+    for (boolean arr[] : copyGrid.getArray())
+    {      
+      for (boolean b : arr)
+      {
+        if (b)
+        {
+          rectangle.setFrame(stepSize*(xPos + startFillGrid.x), stepSize*(yPos + startFillGrid.y), stepSize, stepSize);
+          g2.fill(rectangle);
+          g2.draw(rectangle);
+        }
+
+        yPos += 1;
+      }
+      xPos += 1;
+      yPos = 0;
+    }
   }
   
   private void paintGrid(Graphics2D g2)

@@ -46,4 +46,15 @@ public interface DrawAction {
           Color c,
           double stepSize);
   
+  /**
+   * fills the given grid depending on the implementation
+   * @param grid
+   * @param start
+   * @param end 
+   */
+  public void fill(
+          DataGrid grid,
+          DataGridPosition start,
+          DataGridPosition end);
+  
 }

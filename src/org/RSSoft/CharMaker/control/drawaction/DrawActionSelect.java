@@ -30,6 +30,29 @@ import org.RSSoft.CharMaker.core.DataGridPosition;
  * @author Richard
  */
 public class DrawActionSelect implements DrawAction {
+  
+    /**
+   * Get the upper left and lower right corner of a selection.
+   * If a selection is made, the first point to be set isn't always the upper
+   * left corner, it could be the upper right or lower left or lower right.
+   * This function calulates the upper left and lower right corner and returs it
+   * in the same instances the function is called with.
+   * @param start
+   * @param end 
+   */
+  static public void calculateStartEnd(DataGridPosition start, DataGridPosition end)
+  {
+    int xStart, yStart, xEnd, yEnd;
+    xStart = (start.x < end.x ? start.x : end.x);
+    yStart = (start.y < end.y ? start.y : end.y);
+    xEnd = ((start.x > end.x ? start.x : end.x));
+    yEnd = ((start.y > end.y ? start.y : end.y));
+    
+    start.x = xStart;
+    start.y = yStart;
+    end.x = xEnd;
+    end.y = yEnd;
+  }
 
   @Override
   public void fill(DataGrid grid, DataGridPosition start, DataGridPosition end, Graphics2D g, Color c, double stepSize) {
@@ -39,11 +62,13 @@ public class DrawActionSelect implements DrawAction {
     
     Line2D.Double selectionLine = new Line2D.Double();
     
+    calculateStartEnd(start, end);
+    
     double xStart, yStart, xEnd, yEnd;
-    xStart = (start.x < end.x ? start.x : end.x) * stepSize;
-    yStart = (start.y < end.y ? start.y : end.y) * stepSize;
-    xEnd = ((start.x > end.x ? start.x : end.x) + 1) * stepSize;
-    yEnd = ((start.y > end.y ? start.y : end.y) + 1) * stepSize;
+    xStart = start.x * stepSize;
+    yStart = start.y* stepSize;
+    xEnd = (end.x + 1) * stepSize;
+    yEnd = (end.y + 1) * stepSize;
 
     selectionLine.setLine(xStart, yStart, xEnd, yStart);
     g.draw(selectionLine);
@@ -53,6 +78,10 @@ public class DrawActionSelect implements DrawAction {
     g.draw(selectionLine);
     selectionLine.setLine(xStart, yEnd, xStart, yStart);
     g.draw(selectionLine);    
+  }
+
+  @Override
+  public void fill(DataGrid grid, DataGridPosition start, DataGridPosition end) {
   }
   
 }

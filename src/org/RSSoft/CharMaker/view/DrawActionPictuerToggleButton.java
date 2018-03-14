@@ -16,17 +16,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.RSSoft.CharMaker.control.models;
+package org.RSSoft.CharMaker.view;
 
-import javax.swing.JButton;
+import java.io.IOException;
+import java.io.InputStream;
 import org.RSSoft.CharMaker.control.drawaction.DrawAction;
+import org.RSSoft.CharMaker.control.models.DrawActionButton;
 
 /**
  *
  * @author Richard
  */
-public interface DrawActionButton{
+public class DrawActionPictuerToggleButton extends PictureButton implements DrawActionButton {
   
-  DrawAction getDrawAction();
+  private final DrawAction drawAction;
+  
+  public DrawActionPictuerToggleButton(DrawAction action, InputStream is) throws IOException
+  {
+    super(is);
+    drawAction = action;
+  }
+
+  @Override
+  public DrawAction getDrawAction() {
+    return drawAction;
+  }
   
 }

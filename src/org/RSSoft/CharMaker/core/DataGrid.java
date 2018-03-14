@@ -477,7 +477,7 @@ public class DataGrid implements Serializable
       yStart = t;
     }
     
-    DataGrid selection = new DataGrid(xEnd - xStart, yEnd - yStart);
+    DataGrid selection = new DataGrid(xEnd - xStart + 1, yEnd - yStart + 1);
     
     copy(selection, xStart, yStart, cut);
     
