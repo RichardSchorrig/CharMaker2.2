@@ -27,11 +27,11 @@ import org.RSSoft.CharMaker.control.models.DrawActionButton;
  *
  * @author Richard
  */
-public class DrawActionPictuerToggleButton extends PictureButton implements DrawActionButton {
+public class DrawActionPictureToggleButton extends PictureButton implements DrawActionButton {
   
   private final DrawAction drawAction;
   
-  public DrawActionPictuerToggleButton(DrawAction action, InputStream is) throws IOException
+  public DrawActionPictureToggleButton(DrawAction action, InputStream is) throws IOException
   {
     super(is);
     drawAction = action;

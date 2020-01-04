@@ -28,14 +28,27 @@ import org.RSSoft.CharMaker.core.DataGridPosition;
  *
  * @author Richard
  */
-public class DrawActionStraightLine extends DrawAction {
+public class DrawActionCircle extends DrawAction {
   
+  private int getCircleValue(int value)
+  {
+    int sum = 0;
+    int currentValue = 1;
+    
+    while (sum < value)
+    {
+      sum += currentValue;
+      currentValue += 1;
+      System.out.println(String.format("sum is %d, currentValue is %d", sum, currentValue));
+    }
+    
+    return currentValue - 1;
+  }
 
   @Override
   public void fill(DataGrid grid, DataGridPosition start, DataGridPosition end, Graphics2D g, Color c, double stepSize) {
     
-    Rectangle2D.Double rectangle = new Rectangle2D.Double();
-    
+    Rectangle2D.Double rectangle = new Rectangle2D.Double();    
     Draw draw;
     
     if (null != g)
@@ -50,12 +63,55 @@ public class DrawActionStraightLine extends DrawAction {
     
     int dx = end.x - start.x;
     int dy = end.y - start.y;
+    
+    int r = (int)Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    System.out.println(String.format("radius is %d", r));
+    
+    int residual1 = (r *2) / 3;
+    int maxLen = getCircleValue(residual1);
+    int residual2 = r - residual1 - maxLen;
+    
+    System.out.println(String.format("with r1 %d, r2 %d and maxLen %d", residual1, residual2, maxLen));
+    
+    
     int directionX = dx < 0 ? -1 : 1;
     int directionY = dy < 0 ? -1 : 1;
     
     dx = dx * directionX + 1;
     dy = dy * directionY + 1;
+    
+    int x = start.x;
+    int y = start.y;
+    
+    try {
+      for (int i = 0; i < maxLen; i += 1)
+      {
+        for (int j = 0; j < maxLen - i; j += 1)
+        {
+          grid.setAt(x, y, true);
+          draw.draw(x, y);
+          y += directionY;
+        }
+        x += directionX;
+      }
+      for (int i = 0; i < maxLen; i += 1)
+      {
+        for (int j = maxLen - i; j > 0; j += 1)
+        {
+          grid.setAt(x, y, true);
+          draw.draw(x, y);
+          x += directionX;
+        }
+        y += directionY;
+      }
+
+    } catch (Exception ex)
+    {
       
+    }
+    
+    
+    /*      
     boolean startX = true;    
     int m = 0;
     
@@ -134,11 +190,12 @@ public class DrawActionStraightLine extends DrawAction {
     {
       
     }
+*/
   }
 
   @Override
   public void fill(DataGrid grid, DataGridPosition start, DataGridPosition end) {
-    fill(grid, start, end, null, null, 0);
+    this.fill(grid, start, end, null, null, 0);
   }
   
 }

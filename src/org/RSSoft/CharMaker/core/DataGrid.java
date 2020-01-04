@@ -22,6 +22,7 @@ package org.RSSoft.CharMaker.core;
 import java.awt.image.Raster;
 import java.io.Serializable;
 import java.util.logging.Level;
+import org.RSSoft.CharMaker.control.models.FontSettings;
 import org.RSSoft.CharMaker.util.RSLogger;
 
 /**
@@ -487,7 +488,7 @@ public class DataGrid implements Serializable
   public void manipulate(int rotation, boolean mirrorHorizontal, boolean mirrorVertical) throws Exception
   {
     DataGrid newGrid;
-    if (rotation == GridIterator.ROTATION_0 || rotation == GridIterator.ROTATION_180)
+    if (rotation == FontSettings.ROTATION_0 || rotation == FontSettings.ROTATION_180)
     {
       newGrid = new DataGrid(xSize, ySize);
     }
@@ -523,7 +524,7 @@ public class DataGrid implements Serializable
   
   public void mirror(boolean mirrorHorizontal, boolean mirrorVertical) throws Exception
   {
-    manipulate(GridIterator.ROTATION_0, mirrorHorizontal, mirrorVertical);
+    manipulate(FontSettings.ROTATION_0, mirrorHorizontal, mirrorVertical);
   }
   
   public int getSizeInBytes() {
@@ -549,7 +550,7 @@ public class DataGrid implements Serializable
       GridIteratorOffset offset = new GridIteratorOffset();
       offset.yOffset = 8*i;
       offset.yEnd = 8*i + 7;
-      GridIterator it = new GridIterator(this, GridIterator.ROTATION_0, GridIterator.MIRROR_NONE, offset);
+      GridIterator it = new GridIterator(this, FontSettings.ROTATION_0, FontSettings.MIRROR_NONE, offset);
       for (it.x=it.xBegin; it.conditionX(); it.x+=it.xDirection)
       {
         //int y = c.getGrid().getYSize();
@@ -586,7 +587,7 @@ public class DataGrid implements Serializable
       GridIteratorOffset offset = new GridIteratorOffset();
       offset.yOffset = 8*i;
       offset.yEnd = 8*i + 7;
-      GridIterator it = new GridIterator(this, GridIterator.ROTATION_0, GridIterator.MIRROR_NONE, offset);
+      GridIterator it = new GridIterator(this, FontSettings.ROTATION_0, FontSettings.MIRROR_NONE, offset);
       for (it.x=it.xBegin; it.conditionX(); it.x+=it.xDirection)
       {
         //int y = c.getGrid().getYSize();

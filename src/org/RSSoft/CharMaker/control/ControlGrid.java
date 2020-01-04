@@ -40,6 +40,7 @@ import org.RSSoft.CharMaker.view.GridPane;
 
 /**
  * This class controlls the grid's settings (size) and grid user interaction
+ * TODO: add KeyListener functionality for copy and paste
  * @author Richard
  */
 public class ControlGrid extends DialogShowBaseClass implements ActionListener, MouseListener, MouseMotionListener, ChangeListener

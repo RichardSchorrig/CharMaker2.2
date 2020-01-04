@@ -19,6 +19,8 @@
  */
 package org.RSSoft.CharMaker.core;
 
+import org.RSSoft.CharMaker.control.models.FontSettings;
+
 /**
  * This class provides values for iterating through the datagrid.
  * you can initialize the griditerator with a rotation and mirror values and it
@@ -38,10 +40,10 @@ public class GridIterator {
   public int yDirection;
   public int y;
   
-  public final static int ROTATION_0 = 0;
-  public final static int ROTATION_90 = 1;
-  public final static int ROTATION_180 = 2;
-  public final static int ROTATION_270 = 3;
+//  public final static int ROTATION_0 = 0;
+//  public final static int ROTATION_90 = 1;
+//  public final static int ROTATION_180 = 2;
+//  public final static int ROTATION_270 = 3;
   
   public final static int MIRROR_NONE = 0;
   public final static int MIRROR_HORIZONTAL = 1;
@@ -67,19 +69,19 @@ public class GridIterator {
     boolean mirrorHorizontal = false;
     boolean mirrorVertical = false;
     switch (mirror) {
-      case HeaderWriter.MIRROR_NONE: {
+      case FontSettings.MIRROR_NONE: {
         mirrorHorizontal = false;
         mirrorVertical = false;
       } break;
-      case HeaderWriter.MIRROR_HORIZONTAL: {
+      case FontSettings.MIRROR_HORIZONTAL: {
         mirrorHorizontal = true;
         mirrorVertical = false;
       } break;
-      case HeaderWriter.MIRROR_VERTICAL: {
+      case FontSettings.MIRROR_VERTICAL: {
         mirrorHorizontal = false;
         mirrorVertical = true;
       } break;
-      case HeaderWriter.MIRROR_HORIZONTAL_VERTICAL: {
+      case FontSettings.MIRROR_HORIZONTAL_VERTICAL: {
         mirrorHorizontal = true;
         mirrorVertical = true;
       } break;
@@ -102,7 +104,7 @@ public class GridIterator {
     this.rotation = rotation;             
     
     switch (rotation) {
-      case HeaderWriter.ROTATION_0: {
+      case FontSettings.ROTATION_0: {
         xBegin = mirrorHorizontal ? grid.getXSize()-1 : 0;
         yBegin = mirrorVertical ? 0 : grid.getYSize()-1;
         xEnd = mirrorHorizontal ? 0 : grid.getXSize();
@@ -112,7 +114,7 @@ public class GridIterator {
         x = xBegin;
         y = yBegin;
       } break;
-      case HeaderWriter.ROTATION_90: {
+      case FontSettings.ROTATION_90: {
         xBegin = mirrorVertical ? grid.getYSize()-1 : 0;
         yBegin = mirrorHorizontal ? grid.getXSize()-1 : 0;
         xEnd = mirrorVertical ? 0 : grid.getYSize();
@@ -122,7 +124,7 @@ public class GridIterator {
         x = xBegin;
         y = yBegin;
       } break;
-      case HeaderWriter.ROTATION_180: {
+      case FontSettings.ROTATION_180: {
         xBegin = mirrorHorizontal ? 0 : grid.getXSize()-1;
         yBegin = mirrorVertical ? grid.getYSize()-1 : 0;
         xEnd = mirrorHorizontal ? grid.getXSize() : 0;
@@ -132,7 +134,7 @@ public class GridIterator {
         x = xBegin;
         y = yBegin;
       } break;
-      case HeaderWriter.ROTATION_270: {
+      case FontSettings.ROTATION_270: {
         xBegin = mirrorVertical ? 0 : grid.getYSize()-1;
         yBegin = mirrorHorizontal ? 0 : grid.getXSize()-1;
         xEnd = mirrorVertical ? grid.getYSize() : 0;
@@ -161,7 +163,7 @@ public class GridIterator {
   
   public int getColumnIterator()
   {
-    if (this.rotation == HeaderWriter.ROTATION_0 || this.rotation == HeaderWriter.ROTATION_180)
+    if (this.rotation == FontSettings.ROTATION_0 || this.rotation == FontSettings.ROTATION_180)
       return this.x;
     else
       return this.y;
@@ -169,7 +171,7 @@ public class GridIterator {
   
   public int getRowIterator()
   {
-    if (this.rotation == HeaderWriter.ROTATION_0 || this.rotation == HeaderWriter.ROTATION_180)
+    if (this.rotation == FontSettings.ROTATION_0 || this.rotation == FontSettings.ROTATION_180)
       return this.y;
     else
       return this.x;

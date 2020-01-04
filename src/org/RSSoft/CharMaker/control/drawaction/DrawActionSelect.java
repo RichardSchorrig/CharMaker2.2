@@ -29,7 +29,7 @@ import org.RSSoft.CharMaker.core.DataGridPosition;
  *
  * @author Richard
  */
-public class DrawActionSelect implements DrawAction {
+public class DrawActionSelect extends DrawAction {
   
     /**
    * Get the upper left and lower right corner of a selection.

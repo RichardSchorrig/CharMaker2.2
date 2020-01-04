@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import org.RSSoft.CharMaker.control.models.FontSettings;
 
 /**
  * This panel shows an image that can be rotated / mirrored
@@ -40,20 +41,22 @@ import javax.swing.JPanel;
  */
 public class PicturePane extends JPanel {
   
-  public static final int MIRRORAXIS_HORIZONTAL = 1;
-  public static final int MIRRORAXIS_VERTICAL = 2;
-  
-  public static final int ROTATION_0 = 0;
-  public static final int ROTATION_90 = 1;
-  public static final int ROTATION_180 = 2;
-  public static final int ROTATION_270 = 3;
+//  public static final int MIRRORAXIS_NONE = 0;
+//  public static final int MIRRORAXIS_HORIZONTAL = 1;
+//  public static final int MIRRORAXIS_VERTICAL = 2;
+//  public static final int MIRRORAXIS_BOTH = 3;
+//  
+//  public static final int ROTATION_0 = 0;
+//  public static final int ROTATION_90 = 1;
+//  public static final int ROTATION_180 = 2;
+//  public static final int ROTATION_270 = 3;
   
   private boolean mirrorVertical;
   private boolean mirrorHorizontal;
   
   private int rotation;
   
-  private final BufferedImage picture;
+  private BufferedImage picture;
   
   /**
    * construct a picture pane with the given picture
@@ -81,12 +84,24 @@ public class PicturePane extends JPanel {
     this.mirrorVertical = false;
   }
   
+  public void replaceImage(String pictureFile) throws IOException
+  {
+    this.picture = ImageIO.read(new File(pictureFile));
+    validate();
+  }
+  
+  public void replaceImage(InputStream is) throws IOException
+  {
+    this.picture = ImageIO.read(is);
+    validate();
+  }
+  
   /**
    * mirrors the picture in the given axis. previous mirror operations are kept,
    * so the function can be called twice with both axis to mirror the picture in both
    * directions
    * 
-   * after operation, this pane is repainted
+   * after operation, this pane is not repainted
    * 
    * valid argument for axis are:
    *  MIRRORAXIS_HORIZONTAL
@@ -96,10 +111,14 @@ public class PicturePane extends JPanel {
    */
   public void mirror(int axis) {
     switch (axis) {
-      case MIRRORAXIS_HORIZONTAL:
+      case FontSettings.MIRROR_HORIZONTAL:
         this.mirrorHorizontal = true;
         break;
-      case MIRRORAXIS_VERTICAL:
+      case FontSettings.MIRROR_VERTICAL:
+        this.mirrorVertical = true;
+        break;
+      case FontSettings.MIRROR_HORIZONTAL_VERTICAL:
+        this.mirrorHorizontal = true;
         this.mirrorVertical = true;
         break;
       default:
@@ -107,7 +126,7 @@ public class PicturePane extends JPanel {
         this.mirrorVertical = false;
         break;
     }
-    this.repaint();
+    //this.repaint();
   }
   
   /**
@@ -126,31 +145,31 @@ public class PicturePane extends JPanel {
   /**
    * set the horizontal axis mirrored.
    * 
-   * after operation, this pane is repainted
+   * after operation, this pane is not repainted
    * 
    * @param mirror mirror
    */
   public void mirrorHorizontal(boolean mirror) {
     this.mirrorHorizontal = mirror;
-    this.repaint();
+    //this.repaint();
   }
   
   /**
    * set the vertical axis mirrored.
    * 
-   * after operation, this pane is repainted
+   * after operation, this pane is not repainted
    * 
    * @param mirror mirror
    */
   public void mirrorVertical(boolean mirror) {
     this.mirrorVertical = mirror;
-    this.repaint();
+    //this.repaint();
   }
   
   /**
    * rotate the picture in 90 degree steps.
    * 
-   * after operation, this pane is repainted
+   * after operation, this pane is not repainted
    * 
    * valid arguments for rotation are:
    *  ROTATION_0
@@ -161,7 +180,7 @@ public class PicturePane extends JPanel {
    */
   public void rotate(int rotation) {
     this.rotation = rotation;
-    this.repaint();
+    //this.repaint();
   }
   
   private void transform(Graphics2D g2)

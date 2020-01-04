@@ -22,11 +22,10 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
-import org.RSSoft.CharMaker.core.GridIterator;
+import org.RSSoft.CharMaker.control.models.FontSettings;
+import org.RSSoft.CharMaker.util.RSLogger;
 import org.RSSoft.CharMaker.view.CharMakerWindow;
 import org.RSSoft.CharMaker.view.GridPane;
 import org.RSSoft.CharMaker.view.PictureButton;
@@ -157,22 +156,46 @@ public class ControlGridTransform implements ActionListener
     try {
       if (e.getSource().equals(buttonMirrorH))
       {
+        gridpane.cut();
         gridpane.getCopyGrid().mirror(true, false);
+        gridpane.paste();
       }
       else if (e.getSource().equals(buttonMirrorV))
       {
+        gridpane.cut();
         gridpane.getCopyGrid().mirror(false, true);
+        gridpane.paste();
       }
       else if (e.getSource().equals(buttonRotateLeft))
       {
-        gridpane.getCopyGrid().rotate(GridIterator.ROTATION_90);
+        gridpane.cut();
+        gridpane.getCopyGrid().rotate(FontSettings.ROTATION_90);
+        gridpane.paste();
       }
       else if (e.getSource().equals(buttonRotateRight))
       {
-        gridpane.getCopyGrid().rotate(GridIterator.ROTATION_270);
+        gridpane.cut();
+        gridpane.getCopyGrid().rotate(FontSettings.ROTATION_270);
+        gridpane.paste();
+      }
+      else if (e.getSource().equals(buttonMoveUp))
+      {
+        gridpane.moveSelection(0, -1);
+      }
+      else if (e.getSource().equals(buttonMoveDown))
+      {
+        gridpane.moveSelection(0, 1);
+      }
+      else if (e.getSource().equals(buttonMoveLeft))
+      {
+        gridpane.moveSelection(-1, 0);
+      }
+      else if (e.getSource().equals(buttonMoveRight))
+      {
+        gridpane.moveSelection(1, 0);
       }
     } catch (Exception ex) {
-      Logger.getLogger(ControlGridTransform.class.getName()).log(Level.SEVERE, null, ex);
+      RSLogger.getLogger().log(Level.SEVERE, null, ex);
     }
     gridpane.repaint();
   }

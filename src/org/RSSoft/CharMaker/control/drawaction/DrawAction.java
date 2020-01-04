@@ -20,6 +20,7 @@ package org.RSSoft.CharMaker.control.drawaction;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import org.RSSoft.CharMaker.core.DataGrid;
 import org.RSSoft.CharMaker.core.DataGridPosition;
 
@@ -27,7 +28,36 @@ import org.RSSoft.CharMaker.core.DataGridPosition;
  *
  * @author Richard
  */
-public interface DrawAction {
+public abstract class DrawAction {
+  
+  protected interface Draw {
+    public void draw(int x, int y);
+  }
+  
+  protected class DrawReal implements Draw {
+    
+    private final Rectangle2D.Double rectangle;
+    private final double stepSize;
+    private final Graphics2D g;
+    public DrawReal(Rectangle2D.Double rectangle, double stepSize, Graphics2D g)
+    {
+      this.rectangle = rectangle;
+      this.stepSize = stepSize;
+      this.g = g;
+    }
+    
+    @Override
+    public void draw(int x, int y) {
+      rectangle.setFrame(stepSize*x, stepSize*y, stepSize, stepSize);
+      g.fill(rectangle);
+      g.draw(rectangle);
+    }    
+  }
+  
+  protected class DrawFake implements Draw {
+    @Override
+    public void draw(int x, int y) {}
+  }
   
   /**
    * Fills the given grid and sets the graphics depending on the implementation.
@@ -38,7 +68,7 @@ public interface DrawAction {
    * @param c the color to paint
    * @param stepSize the grid size, depending on this value the graphics are drawn.
    */
-  public void fill(
+  public abstract void fill(
           DataGrid grid,
           DataGridPosition start,
           DataGridPosition end,
@@ -52,7 +82,7 @@ public interface DrawAction {
    * @param start
    * @param end 
    */
-  public void fill(
+  public abstract void fill(
           DataGrid grid,
           DataGridPosition start,
           DataGridPosition end);

@@ -35,6 +35,7 @@ import org.RSSoft.CharMaker.control.ControlGrid;
 import org.RSSoft.CharMaker.control.ControlGridTransform;
 import org.RSSoft.CharMaker.control.ControlNewOpenWriteCharset;
 import org.RSSoft.CharMaker.control.ControlPreview;
+import org.RSSoft.CharMaker.control.ScanDirectionControl;
 import org.RSSoft.CharMaker.util.RSLogger;
 import org.RSSoft.CharMaker.util.SavedSettings;
 import org.RSSoft.CharMaker.view.CharMakerWindow;
@@ -43,7 +44,7 @@ import org.RSSoft.CharMaker.view.CharMakerWindow;
  * an application to design pixel fonts and exporting them as c header files
  * @author richard
  */
-public class CharMaker implements KeyListener {
+public class CharMaker {
   
   private ControlGrid gridController;
   
@@ -78,7 +79,9 @@ public class CharMaker implements KeyListener {
       
       //ControlFileOperation fileController = new ControlFileOperation(window, settings);
       //fileController.addCharacterListController(charListController);
-      ControlFontSettings fontController = new ControlFontSettings(window);
+      ScanDirectionControl scanDirectionControl = new ScanDirectionControl(window);
+      
+      ControlFontSettings fontController = new ControlFontSettings(window, scanDirectionControl);
       fontController.setLabels();
       //outputController.setObservable(charListController).setObservable(fileController);
       
@@ -96,7 +99,6 @@ public class CharMaker implements KeyListener {
 //      io.setLabels();
       
       window.setVisible(true);
-      window.addKeyListener(this);
       
     } catch (IOException ex) {
       RSLogger.getLogger().log(Level.SEVERE, null, ex);
@@ -118,28 +120,5 @@ public class CharMaker implements KeyListener {
     public static void main(String[] args) {
         new CharMaker();
     }
-
-  @Override
-  public void keyTyped(KeyEvent e) {
-    if (e.isControlDown())
-    {
-      if (Character.toLowerCase(e.getKeyChar()) == 'c')
-      {
-        gridController.getGridPane().copy();
-      }
-      if (Character.toLowerCase(e.getKeyChar()) == 'v')
-      {
-        gridController.getGridPane().paste();
-      }
-    }
-  }
-
-  @Override
-  public void keyPressed(KeyEvent e) {
-  }
-
-  @Override
-  public void keyReleased(KeyEvent e) {
-  }
     
 }

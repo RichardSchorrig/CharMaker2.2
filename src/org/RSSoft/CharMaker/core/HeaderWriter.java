@@ -37,15 +37,15 @@ import org.RSSoft.CharMaker.util.RSLogger;
  */
 public class HeaderWriter
 {
-  public final static int ROTATION_0 = 0;
-  public final static int ROTATION_90 = 1;
-  public final static int ROTATION_180 = 2;
-  public final static int ROTATION_270 = 3;
+//  public final static int ROTATION_0 = 0;
+//  public final static int ROTATION_90 = 1;
+//  public final static int ROTATION_180 = 2;
+//  public final static int ROTATION_270 = 3;
   
-  public final static int MIRROR_NONE = 0;
-  public final static int MIRROR_HORIZONTAL = 1;
-  public final static int MIRROR_VERTICAL = 2;
-  public final static int MIRROR_HORIZONTAL_VERTICAL = 3;
+//  public final static int MIRROR_NONE = 0;
+//  public final static int MIRROR_HORIZONTAL = 1;
+//  public final static int MIRROR_VERTICAL = 2;
+//  public final static int MIRROR_HORIZONTAL_VERTICAL = 3;
   
   public final static String OUTPUT_HEX_8BIT = "0x%02x";
   public final static String OUTPUT_HEX_16BIT = "0x%04x";

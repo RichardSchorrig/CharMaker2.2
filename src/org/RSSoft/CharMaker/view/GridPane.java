@@ -19,15 +19,15 @@
  */
 package org.RSSoft.CharMaker.view;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import org.RSSoft.CharMaker.control.ControlGridTransform;
 import org.RSSoft.CharMaker.control.drawaction.DrawAction;
@@ -42,7 +42,7 @@ import org.RSSoft.CharMaker.util.RSLogger;
  * The grid can be filled at a certain position or along a horizontal or vertical line
  * @author Richard
  */
-public class GridPane extends JPanel
+public class GridPane extends JPanel implements KeyListener
 {
   private Line2D.Double line;
   private Rectangle2D.Double rectangle;
@@ -51,8 +51,8 @@ public class GridPane extends JPanel
   private DataGrid previewGrid;
   private DataGrid copyGrid;
   
-  private int xSize;
-  private int ySize;
+  private int xGridSize;
+  private int yGridSize;
   private double stepSize;
   
   private DataGridPosition startFillGrid;
@@ -92,6 +92,8 @@ public class GridPane extends JPanel
     this.currentDrawMode = new DrawActionStraightLine();
     this.selectMode = false;
     this.selectionValid = false;
+    
+    this.addKeyListener(this);
   }
   
   public void setSelectMode(boolean selectMode)
@@ -136,10 +138,40 @@ public class GridPane extends JPanel
       System.out.println("trying to paste");
       try {
         grid.paste(copyGrid, startFillGrid.x, startFillGrid.y);
+        copyGrid = null;
       } catch (Exception ex) {
         RSLogger.getLogger().log(Level.SEVERE, null, ex);
       }
     }
+  }
+  
+  
+  public boolean moveSelection(int x, int y)
+  {
+    boolean retVal = false;
+    if (selectMode && selectionValid)
+    {
+      int xResStart = startFillGrid.x + x;
+      int yResStart = startFillGrid.y + y;
+      int xResEnd = endFillGrid.x + x;
+      int yResEnd = endFillGrid.y + y;
+      
+      if (xResStart >= 0 && xResEnd < grid.getXSize())
+      {
+        startFillGrid.x = xResStart;
+        endFillGrid.x = xResEnd;
+        retVal = true;
+        System.out.println(String.format("xStart %d xEnd %x, max %d", xResStart, xResEnd, xGridSize));
+      }
+      if (yResStart >= 0 && yResEnd < grid.getYSize())
+      {
+        startFillGrid.y = yResStart;
+        endFillGrid.y = yResEnd;
+        retVal = true;
+        System.out.println(String.format("yStart %d yEnd %x, max %d", yResStart, yResEnd, yGridSize));
+      }
+    }
+    return retVal;
   }
   
   public void addTransformControl(ControlGridTransform transformController)
@@ -154,33 +186,14 @@ public class GridPane extends JPanel
   
   private void calculateDimensions()
   {
-    xSize = this.getParent().getWidth();
-    stepSize = xSize / grid.getXSize();
-    ySize = (int) (stepSize * grid.getYSize());
-    if (ySize > this.getParent().getHeight())
+    xGridSize = this.getParent().getWidth();
+    stepSize = xGridSize / grid.getXSize();
+    yGridSize = (int) (stepSize * grid.getYSize());
+    if (yGridSize > this.getParent().getHeight())
     {
-      ySize = this.getParent().getHeight();
-      stepSize = ySize / grid.getYSize();
-      xSize = (int) (stepSize * grid.getXSize());
-    }
-  }
-  
-  @Override
-  public void paintComponent(Graphics g)
-  {
-    super.paintComponent(g);
-    this.calculateDimensions();
-    
-    this.paintGrid((Graphics2D) g);
-    if (selectionValid)
-    {
-      this.fillAllGrid((Graphics2D) g);
-      this.fillAllCopyGrid((Graphics2D) g);
-      this.fill((Graphics2D) g);
-    }
-    else
-    {
-      this.fillAllGrid((Graphics2D) g);
+      yGridSize = this.getParent().getHeight();
+      stepSize = yGridSize / grid.getYSize();
+      xGridSize = (int) (stepSize * grid.getXSize());
     }
   }
 
@@ -326,7 +339,6 @@ public class GridPane extends JPanel
       DrawActionSelect.calculateStartEnd(startFillGrid, endFillGrid);
       selectionValid = true;
       transformController.setActive(true);
-      this.cut();
     }
     else
     {
@@ -350,24 +362,6 @@ public class GridPane extends JPanel
       fill(g2);
       g2.dispose();  
     }      
-  }
-  
-  private void paintGrid()
-  {
-    boolean add = this.fill();
-    
-    if (add)
-    {
-      grid.addGrid(previewGrid);
-    }
-    else
-    {
-      grid.substractGrid(previewGrid);
-    }
-    
-    previewGrid.clearGrid();
-    
-    this.repaint();
   }
   
   public void fill(Point start, Point end)
@@ -427,6 +421,10 @@ public class GridPane extends JPanel
   
   private void fillAllCopyGrid(Graphics2D g2)
   {
+    if (null == copyGrid)
+    {
+      return;
+    }
     g2.setColor(Color.black);
     
     int xPos = 0;
@@ -449,20 +447,86 @@ public class GridPane extends JPanel
     }
   }
   
+    private void paintGrid()
+  {
+    boolean add = this.fill();
+    
+    if (add)
+    {
+      grid.addGrid(previewGrid);
+    }
+    else
+    {
+      grid.substractGrid(previewGrid);
+    }
+    
+    previewGrid.clearGrid();
+    
+    this.repaint();
+  }
+  
   private void paintGrid(Graphics2D g2)
   {    
     g2.setColor(Color.black);
     int i;
     for (i=1; i<grid.getXSize(); i+=1)
     {
-      line.setLine(stepSize*i, 0, stepSize*i, ySize);
+      line.setLine(stepSize*i, 0, stepSize*i, yGridSize);
       g2.draw(line);
     }
     for (i=1; i<grid.getYSize(); i+=1)
     {
-      line.setLine(0, stepSize*i, xSize, stepSize*i);
+      line.setLine(0, stepSize*i, xGridSize, stepSize*i);
       g2.draw(line);
     }
     this.setSize((int) (grid.getXSize() * stepSize), (int) (grid.getYSize() * stepSize));
+  }
+  
+  @Override
+  public void paintComponent(Graphics g)
+  {
+    super.paintComponent(g);
+    this.calculateDimensions();
+    
+    this.paintGrid((Graphics2D) g);
+    if (selectionValid)
+    {
+      this.fillAllGrid((Graphics2D) g);
+      this.fillAllCopyGrid((Graphics2D) g);
+      this.fill((Graphics2D) g);
+    }
+    else
+    {
+      this.fillAllGrid((Graphics2D) g);
+    }
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+    if (e.isControlDown())
+    {
+      switch (Character.toLowerCase(e.getKeyChar())) {
+        case 'c':
+          this.copy();
+          break;
+        case 'x':
+          this.cut();
+          break;
+        case 'v':
+          this.paste();
+          break;
+        default:
+          break;
+      }
+      System.out.println(String.format("pressed Ctrl and %c", e.getKeyChar()));
+    }
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
   }
 }

@@ -19,16 +19,25 @@
  */
 package org.RSSoft.CharMaker.control.models;
 
+import java.io.Serializable;
+
 /**
  * This class is a container containing font settings for the c header writer
  * @author Richard
  */
-public class FontSettings {
+public class FontSettings implements Serializable {
+    
+  private static final long serialVersionUID = 0x20200104L;
   
   public static final int ROTATION_0 = 0;
   public static final int ROTATION_90 = 1;
   public static final int ROTATION_180 = 2;
   public static final int ROTATION_270 = 3;
+  
+  public final static int MIRROR_NONE = 0;
+  public final static int MIRROR_HORIZONTAL = 1;
+  public final static int MIRROR_VERTICAL = 2;
+  public final static int MIRROR_HORIZONTAL_VERTICAL = 3;
   
   public static final int BITORDER_MSB = 0;
   public static final int BITORDER_LSB = 1;
@@ -39,16 +48,26 @@ public class FontSettings {
   public static final int ALIGNMENT_TOP = 0;
   public static final int ALIGNMENT_BOTTOM = 1;
   
-  private final static String DATATYPE_NAME_UCHAR = "unsigned char";
-  private final static String DATATYPE_NAME_UINT_8 = "uint8_t";
-  private final static String DATATYPE_NAME_UINT_16 = "uint16_t";
-  private final static String DATATYPE_NAME_UINT_32 = "uint32_t";
-  private final static String DATATYPE_NAME_UINT_64 = "uint64_t";
+  public final static String DATATYPE_NAME_UCHAR = "unsigned char";
+  public final static String DATATYPE_NAME_CHAR = "char";
+  public final static String DATATYPE_NAME_UINT_8 = "uint8_t";
+  public final static String DATATYPE_NAME_UINT_16 = "uint16_t";
+  public final static String DATATYPE_NAME_UINT_32 = "uint32_t";
+  public final static String DATATYPE_NAME_UINT_64 = "uint64_t";
   
   public final static int DATATYPE_8Bit = 8;
   public final static int DATATYPE_16Bit = 16;
   public final static int DATATYPE_32Bit = 32;
   public final static int DATATYPE_64Bit = 64;
+  
+  public final static int SCANDIRECTION_UP_DOWN = 0x01;
+  public final static int SCANDIRECTION_DOWN_UP = 0x02;
+  
+  public final static int SCANDIRECTION_LEFT_RIGHT = 0x10;
+  public final static int SCANDIRECTION_RIGHT_LEFT = 0x20;
+  
+  public final static int SCANDIRECTION_VERTICAL_OVER_HORIZONTAL = 0x100;
+  public final static int SCANDIRECTION_HORIZONTAL_OVER_VERTICAL = 0x200;
   
   public int rotation;
   public int bitOrder;
@@ -61,9 +80,15 @@ public class FontSettings {
   public String dataType;
   public int bits;
   
+  public int scanDirection;
+  public boolean organizedInColunms;
+  public boolean invert;
+  
   /**
-   * construct a standard container where all fields are 0
+   * construct the settings with the defaults (most are 0)
    */
-  public FontSettings(){}
+  public FontSettings(){
+      scanDirection = SCANDIRECTION_VERTICAL_OVER_HORIZONTAL | SCANDIRECTION_LEFT_RIGHT | SCANDIRECTION_UP_DOWN;
+  }
   
 }

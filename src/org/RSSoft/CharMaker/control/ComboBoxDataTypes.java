@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
+import org.RSSoft.CharMaker.control.models.FontSettings;
 import org.RSSoft.CharMaker.control.subsystem.VarBitdepthID;
 
 /**
@@ -48,11 +49,12 @@ public class ComboBoxDataTypes implements ComboBoxModel
   public ComboBoxDataTypes()
   {
     dataTypes = new ArrayList<>();
-    dataTypes.add(new VarBitdepthID("unsigned char", 8));
-    dataTypes.add(new VarBitdepthID("uint8_t", 8));
-    dataTypes.add(new VarBitdepthID("uint16_t", 16));
-    dataTypes.add(new VarBitdepthID("uint32_t", 32));
-    dataTypes.add(new VarBitdepthID("uint64_t", 64));
+    dataTypes.add(new VarBitdepthID(FontSettings.DATATYPE_NAME_CHAR, FontSettings.DATATYPE_8Bit));
+    dataTypes.add(new VarBitdepthID(FontSettings.DATATYPE_NAME_UCHAR, FontSettings.DATATYPE_8Bit));
+    dataTypes.add(new VarBitdepthID(FontSettings.DATATYPE_NAME_UINT_8, FontSettings.DATATYPE_8Bit));
+    dataTypes.add(new VarBitdepthID(FontSettings.DATATYPE_NAME_UINT_16, FontSettings.DATATYPE_16Bit));
+    dataTypes.add(new VarBitdepthID(FontSettings.DATATYPE_NAME_UINT_32, FontSettings.DATATYPE_32Bit));
+    dataTypes.add(new VarBitdepthID(FontSettings.DATATYPE_NAME_UINT_64, FontSettings.DATATYPE_64Bit));
   }
 
   /**
@@ -80,6 +82,23 @@ public class ComboBoxDataTypes implements ComboBoxModel
   {
     return dataTypes.get(selectedItem);
   }
+  
+  /**
+   * selects the first element corresponding to the bit depth
+   * @param bitDepth 
+   */
+  public void setBitDepth(int bitDepth)
+  {
+      for (VarBitdepthID id : dataTypes)
+      {
+          if (id.getDepth() == bitDepth)
+          {
+              setSelectedItem(id);
+              break;
+          }
+      }
+  }
+          
   
   /**
    * returns the bit depth of the selection (8, 16, 32, 64)

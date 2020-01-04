@@ -38,6 +38,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.RSSoft.CharMaker.control.models.FontSettings;
 import org.RSSoft.CharMaker.core.BitmapReader;
 import org.RSSoft.CharMaker.core.DataGrid;
 import org.RSSoft.CharMaker.core.character.CharacterSet;
@@ -167,6 +168,7 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
     BufferedOutputStream buffout = new BufferedOutputStream(fos);
     ObjectOutputStream oos = new ObjectOutputStream(buffout);
     oos.writeObject(this.list.getCurrentCharacterSet());
+    oos.writeObject(this.fontSettings.getFontSettings());
     oos.flush();
     oos.close();
     
@@ -186,6 +188,13 @@ public class ControlNewOpenWriteCharset implements ActionListener, Observer
       BufferedInputStream buffin = new BufferedInputStream(fis);
       ObjectInputStream ois = new ObjectInputStream(buffin);
       CharacterSet charSet = (CharacterSet) ois.readObject();
+      
+      try {
+          FontSettings settings = (FontSettings)ois.readObject();
+          fontSettings.setFontSettings(settings);
+      } catch (IOException ex1) {
+          RSLogger.getLogger().log(Level.INFO, "file was saved with an older version...", ex1);
+      }
       ois.close();
 
       charSet.validate();
