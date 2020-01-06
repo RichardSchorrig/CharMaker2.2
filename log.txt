@@ -1,32 +1,71 @@
-2020-01-04 | 15:51:12 |  326 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2020-01-04 | 15:57:23 |  326 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 15:57:46 |  465 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 15:57:55 |  204 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: font, height: 8, width: 8
-2020-01-04 | 15:57:55 |  206 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2020-01-04 | 15:58:06 |  178 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 15:58:34 |  236 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 15:58:45 |  794 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet 
-2020-01-04 | 15:58:52 |  457 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: a
-2020-01-04 | 15:58:57 |   45 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
-2020-01-04 | 15:59:01 |  491 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
-2020-01-04 | 15:59:09 |  269 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
-2020-01-04 | 15:59:17 |  420 | INFO | org.RSSoft.CharMaker.control.ControlExit | reactOnUnsavedProject | character set not saved
-2020-01-04 | 16:14:54 |  439 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 16:15:09 |  689 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2020-01-04 | 16:15:39 |  537 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 16:15:43 |  758 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
-2020-01-04 | 16:17:58 |   21 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
-2020-01-04 | 16:18:19 |  135 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character:  
-2020-01-04 | 16:18:22 |  943 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: !
-2020-01-04 | 16:18:54 |  942 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: "
-2020-01-04 | 16:19:16 |  326 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: #
-2020-01-04 | 16:19:46 |  533 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: $
-2020-01-04 | 16:20:58 |  710 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: %
-2020-01-04 | 16:22:07 |  359 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: &
-2020-01-04 | 16:22:52 |  702 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: '
-2020-01-04 | 16:23:16 |  958 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: (
-2020-01-04 | 16:23:51 |  662 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: )
-2020-01-04 | 16:24:11 |  268 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: *
-2020-01-04 | 16:24:31 |  749 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: +
-2020-01-04 | 16:24:56 |  925 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: ,
-2020-01-04 | 16:25:13 |  412 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: -
+2020-01-06 | 03:33:54 |  169 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 03:42:15 |  748 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 03:42:19 |  690 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 03:45:41 |   32 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 03:45:44 |  776 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 03:46:40 |  184 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 03:46:44 |  196 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 03:47:31 |  675 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 03:47:35 |  121 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 03:49:53 |  252 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: Sixteen, height: 32, width: 16
+2020-01-06 | 03:49:53 |  254 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 03:50:05 |  156 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 0
+2020-01-06 | 03:55:16 |  514 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 2
+2020-01-06 | 03:58:12 |  473 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 1
+2020-01-06 | 03:59:52 |  170 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 3
+2020-01-06 | 04:03:35 |  127 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 5
+2020-01-06 | 04:09:07 |  943 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: 4
+2020-01-06 | 04:16:04 |  328 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:04 |  379 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:04 |  419 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:04 |  465 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:04 |  514 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:04 |  576 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:48 |  703 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:48 |  734 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:48 |  763 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:48 |  795 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:48 |  832 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:16:48 |  865 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:19:47 |  174 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:21:10 |   50 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:21:10 |   79 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:21:10 |  111 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:21:10 |  145 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 04:21:10 |  179 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | aquireCharacter | null
+2020-01-06 | 19:16:27 |  611 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 19:16:38 |  799 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet Sixteen
+2020-01-06 | 19:53:28 |  872 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 19:53:28 |  921 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 19:53:28 |  953 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 19:53:29 |   12 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 19:53:29 |   70 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 19:53:29 |  112 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 19:56:05 |  298 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:00:25 |  960 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:00:36 |  816 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:00:36 |  847 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:00:36 |  883 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:00:36 |  935 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:02:31 |  426 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 20:02:36 |  929 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet LayerNumbers
+2020-01-06 | 20:02:56 |  872 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:02:56 |  925 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:02:56 |  960 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:02:56 |  994 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:02:57 |   32 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:02:57 |   92 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:04:44 |  579 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:06:20 |  154 | SEVERE | org.RSSoft.CharMaker.core.HeaderWriter | declareCharacter | null
+2020-01-06 | 20:10:28 |  323 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 20:10:33 |  290 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet LayerNumbers
+2020-01-06 | 20:24:39 |  624 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 20:24:46 |  409 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet LayerNumbers2
+2020-01-06 | 20:26:47 |  411 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
+2020-01-06 | 20:33:19 |  199 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: , height: 8, width: 8
+2020-01-06 | 20:33:25 |  568 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet LayerNumbers2
+2020-01-06 | 20:34:22 |  822 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet font
+2020-01-06 | 21:42:03 |  738 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | <init> | new Character set: LedStatus2, height: 32, width: 32
+2020-01-06 | 21:42:03 |  740 | INFO | org.RSSoft.CharMaker.control.ControlCharacterSet | setCurrentCharacterSet | set a new CharacterSet LedStatus2
+2020-01-06 | 21:42:15 |  817 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: a
+2020-01-06 | 21:54:47 |  190 | INFO | org.RSSoft.CharMaker.core.character.CharacterSet | addCharacter | new Character: b

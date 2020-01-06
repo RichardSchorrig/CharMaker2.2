@@ -45,12 +45,14 @@ public class GridIterator {
 //  public final static int ROTATION_180 = 2;
 //  public final static int ROTATION_270 = 3;
   
-  public final static int MIRROR_NONE = 0;
-  public final static int MIRROR_HORIZONTAL = 1;
-  public final static int MIRROR_VERTICAL = 2;
-  public final static int MIRROR_HORIZONTAL_VERTICAL = 3;
+//  public final static int MIRROR_NONE = 0;
+//  public final static int MIRROR_HORIZONTAL = 1;
+//  public final static int MIRROR_VERTICAL = 2;
+//  public final static int MIRROR_HORIZONTAL_VERTICAL = 3;
   
   private int rotation;
+  
+  private int horizontalOverVertical;
   
   /**
    * initialize the grid iterator
@@ -59,12 +61,38 @@ public class GridIterator {
    * @param mirror
    * @throws Exception 
    */
-  public GridIterator(DataGrid grid, int rotation, int mirror) throws Exception
+  public GridIterator(DataGrid grid, int scanDirection) throws Exception
   {
-    this(grid, rotation, mirror, null);
+    init(grid, scanDirection, null);
   }
   
-  public GridIterator(DataGrid grid, int rotation, int mirror, GridIteratorOffset offset) throws Exception
+  public GridIterator(DataGrid grid, int scanDirection, GridArea offset) throws Exception
+  {
+      init(grid, scanDirection, offset);
+//    boolean mirrorHorizontal = false;
+//    boolean mirrorVertical = false;
+//    switch (mirror) {
+//      case FontSettings.MIRROR_NONE: {
+//        mirrorHorizontal = false;
+//        mirrorVertical = false;
+//      } break;
+//      case FontSettings.MIRROR_HORIZONTAL: {
+//        mirrorHorizontal = true;
+//        mirrorVertical = false;
+//      } break;
+//      case FontSettings.MIRROR_VERTICAL: {
+//        mirrorHorizontal = false;
+//        mirrorVertical = true;
+//      } break;
+//      case FontSettings.MIRROR_HORIZONTAL_VERTICAL: {
+//        mirrorHorizontal = true;
+//        mirrorVertical = true;
+//      } break;
+//    }
+//    this.init(grid, rotation, mirrorHorizontal, mirrorVertical, offset);
+  }
+  
+  public GridIterator(DataGrid grid, int rotation, int mirror, GridArea area) throws Exception
   {
     boolean mirrorHorizontal = false;
     boolean mirrorVertical = false;
@@ -86,7 +114,7 @@ public class GridIterator {
         mirrorVertical = true;
       } break;
     }
-    this.init(grid, rotation, mirrorHorizontal, mirrorVertical, offset);
+    this.init(grid, rotation, mirrorHorizontal, mirrorVertical, area);
   }
   
   public GridIterator(DataGrid grid, int rotation, boolean mirrorHorizontal, boolean mirrorVertical) throws Exception
@@ -94,15 +122,14 @@ public class GridIterator {
     this.init(grid, rotation, mirrorHorizontal, mirrorVertical, null);
   }
   
-  public GridIterator(DataGrid grid, int rotation, boolean mirrorHorizontal, boolean mirrorVertical, GridIteratorOffset offset) throws Exception
+  public GridIterator(DataGrid grid, int rotation, boolean mirrorHorizontal, boolean mirrorVertical, GridArea area) throws Exception
   {
-    this.init(grid, rotation, mirrorHorizontal, mirrorVertical, offset);
+    this.init(grid, rotation, mirrorHorizontal, mirrorVertical, area);
   }
   
-  private void init(DataGrid grid, int rotation, boolean mirrorHorizontal, boolean mirrorVertical, GridIteratorOffset offset) throws Exception
+  
+  private void init(DataGrid grid, int rotation, boolean mirrorHorizontal, boolean mirrorVertical, GridArea area) throws Exception
   {
-    this.rotation = rotation;             
-    
     switch (rotation) {
       case FontSettings.ROTATION_0: {
         xBegin = mirrorHorizontal ? grid.getXSize()-1 : 0;
@@ -148,6 +175,60 @@ public class GridIterator {
         throw new Exception("invalid parameter");
       }      
     }
+    
+    this.rotation = rotation;
+    horizontalOverVertical = -1;
+    if (area != null) {
+      if (area.xOffset != -1) {
+        xBegin = xBegin < xEnd ? xBegin + area.xOffset : area.xEnd > xBegin ? xBegin : area.xEnd;
+        xEnd = xEnd > xBegin ? area.xEnd > xEnd ? xEnd : area.xEnd : xEnd + area.xOffset;
+      }
+      
+      if (area.yOffset != -1) {
+        yBegin = yBegin < yEnd ? yBegin + area.yOffset : area.yEnd > yBegin ? yBegin : area.yEnd;
+        yEnd = yEnd > yBegin ? area.yEnd > yEnd ? yEnd : area.yEnd : yEnd + area.yOffset;
+      }
+    }
+  }
+  
+  private void init(DataGrid grid, int scanDirection, GridArea offset) throws Exception
+  {
+      horizontalOverVertical = (scanDirection & 0x300);
+      rotation = -1;
+      
+      switch (scanDirection & 0x30) {
+        case FontSettings.SCANDIRECTION_RIGHT_LEFT: {
+          xBegin = grid.getXSize()-1;
+          xEnd = 0;
+          xDirection = -1;
+          x = xBegin;
+        } break;
+        default:
+        case FontSettings.SCANDIRECTION_LEFT_RIGHT: {
+          xBegin = 0;
+          xEnd = grid.getXSize();
+          xDirection = 1;
+          x = xBegin;
+        } break;
+      }
+      
+      switch (scanDirection & 0x3) {
+        case FontSettings.SCANDIRECTION_DOWN_UP: {
+          yBegin = grid.getYSize()-1;
+          yEnd = 0;
+          yDirection = -1;
+          y = yBegin;
+        } break;
+        default:
+        case FontSettings.SCANDIRECTION_UP_DOWN: {
+          yBegin = 0;
+          yEnd = grid.getYSize();
+          yDirection = 1;
+          y = yBegin;
+        } break;
+      }      
+    
+
     if (offset != null) {
       if (offset.xOffset != -1) {
         xBegin = xBegin < xEnd ? xBegin + offset.xOffset : offset.xEnd > xBegin ? xBegin : offset.xEnd;
@@ -163,18 +244,36 @@ public class GridIterator {
   
   public int getColumnIterator()
   {
-    if (this.rotation == FontSettings.ROTATION_0 || this.rotation == FontSettings.ROTATION_180)
-      return this.x;
-    else
-      return this.y;
+      if (horizontalOverVertical != -1) {
+        if (horizontalOverVertical == FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL) {
+          return this.y;
+        } else {
+          return this.x;
+        }
+      } else {
+          if (rotation == FontSettings.ROTATION_0 || rotation == FontSettings.ROTATION_180) {
+              return this.x;
+          } else {
+              return this.y;
+          }
+      }
   }
   
   public int getRowIterator()
   {
-    if (this.rotation == FontSettings.ROTATION_0 || this.rotation == FontSettings.ROTATION_180)
-      return this.y;
-    else
-      return this.x;
+      if (horizontalOverVertical != -1) {
+        if (horizontalOverVertical == FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL) {
+          return this.x;
+        } else {
+          return this.y;
+        }
+      } else {
+          if (rotation == FontSettings.ROTATION_0 || rotation == FontSettings.ROTATION_180) {
+              return this.y;
+          } else {
+              return this.x;
+          }
+      }
   }
   
   public boolean conditionX()

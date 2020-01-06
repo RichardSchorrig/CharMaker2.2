@@ -61,7 +61,7 @@ public class ControlFontSettings implements ActionListener {
 
     private final JCheckBox checkBoxMirrorHorizontally;
     private final JCheckBox checkBoxMirrorVertically;
-    private final JCheckBox checkBoxAlignTop;
+    private final JCheckBox checkBoxInvert;
     private final JCheckBox checkBoxCharacterPreview;
 
     private final JComboBox comboBoxDataTypes;
@@ -114,24 +114,41 @@ public class ControlFontSettings implements ActionListener {
             this.rotationPreview = new PicturePane(this.getClass().getClassLoader().getResourceAsStream("media/preview_FontSettings3.png"));
             this.scanDirectionPreview = new PicturePane(this.getClass().getClassLoader().getResourceAsStream("media/ScanDirectionDirect.png"));
             
+            //this.rotationPreview.setMinimumSize(dim1);
+            //this.rotationPreview.setMaximumSize(dim1);
+            //this.rotationPreview.setPreferredSize(dim1);
             this.rotationPreview.validate();
+            
+            //this.scanDirectionPreview.setMinimumSize(dim1);
+            //this.scanDirectionPreview.setMaximumSize(dim1);
+            //this.scanDirectionPreview.setPreferredSize(dim1);
             this.scanDirectionPreview.validate();
             this.scanDirectionPreview.setOpaque(false);
             
             OverlayLayout overlay = new OverlayLayout(this.rotationPreview);
             rotationPreview.setLayout(overlay);
             this.rotationPreview.add(this.scanDirectionPreview);
+            
+            Dimension dim1 = this.rotationPreview.getPreferredSize();
+            Dimension dim2 = this.scanDirectionPreview.getPreferredSize();
+            
+            dim1.height = (dim1.height > dim2.height ? dim1.height : dim2.height) + 2;
+            dim1.width = (dim1.width > dim2.width ? dim1.width : dim2.width) + 2;
+            
+            this.rotationPreview.setMinimumSize(dim1);
+            this.rotationPreview.setMaximumSize(dim1);
+            this.rotationPreview.setPreferredSize(dim1);
+            this.rotationPreview.validate();
+            
+            this.scanDirectionPreview.setMinimumSize(dim1);
+            this.scanDirectionPreview.setMaximumSize(dim1);
+            this.scanDirectionPreview.setPreferredSize(dim1);
+            this.scanDirectionPreview.validate();
 
             Box box = new Box(BoxLayout.Y_AXIS);
             box.add(Box.createVerticalGlue());
             box.add(this.rotationPreview);
             box.add(Box.createVerticalGlue());
-
-            Dimension dim1 = this.rotationPreview.getPreferredSize();
-            Dimension dim2 = this.scanDirectionPreview.getPreferredSize();
-            
-            dim1.height = dim1.height > dim2.height ? dim1.height : dim2.height;
-            dim1.width = dim1.width > dim2.width ? dim1.width : dim2.width;
             
             box.setPreferredSize(dim1);
             box.setMaximumSize(dim1);
@@ -161,7 +178,7 @@ public class ControlFontSettings implements ActionListener {
         this.checkBoxMirrorHorizontally.addActionListener(this);
         this.checkBoxMirrorVertically.addActionListener(this);
 
-        this.checkBoxAlignTop = view.getCheckBoxAlignAtTop();
+        this.checkBoxInvert = view.getCheckBoxAlignAtTop();
         this.checkBoxCharacterPreview = view.getCheckBoxCharacterPreview();
 
         this.labelFontName = view.getLabelFontName();
@@ -222,7 +239,7 @@ public class ControlFontSettings implements ActionListener {
 
         this.checkBoxMirrorHorizontally.setText("Mirror Horizontally");
         this.checkBoxMirrorVertically.setText(("Mirror Vertically"));
-        this.checkBoxAlignTop.setText("unused, remove");
+        this.checkBoxInvert.setText("invert");
         this.checkBoxCharacterPreview.setText("Character Preview in Comments");
 
         this.fontName.setText("font");
@@ -276,6 +293,7 @@ public class ControlFontSettings implements ActionListener {
         fontSettings.endianOrder = this.getActiveEndianOrderButtonIndex();
 
         fontSettings.commentPreview = this.checkBoxCharacterPreview.isSelected();
+        fontSettings.invert = this.checkBoxInvert.isSelected();
 
         scanDirectionControl.updateFontSettings(fontSettings);
         
@@ -370,30 +388,30 @@ public class ControlFontSettings implements ActionListener {
             RSLogger.getLogger().log(Level.SEVERE, null, ex);
         }
         
-        scanDirectionPreview.mirror(PicturePane.MIRRORAXIS_NONE);
-        scanDirectionPreview.rotate(PicturePane.ROTATION_0);
+        scanDirectionPreview.mirror(FontSettings.MIRROR_NONE);
+        scanDirectionPreview.rotate(FontSettings.ROTATION_0);
         
-        if ((rotation & FontSettings.SCANDIRECTION_VERTICAL_OVER_HORIZONTAL) != 0) {
-            scanDirectionPreview.rotate(PicturePane.ROTATION_90);
-            scanDirectionPreview.mirror(PicturePane.MIRRORAXIS_HORIZONTAL);
+        if ((rotation & FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL) != 0) {
+            scanDirectionPreview.rotate(FontSettings.ROTATION_90);
+            scanDirectionPreview.mirror(FontSettings.MIRROR_HORIZONTAL);
             
             if ((rotation & FontSettings.SCANDIRECTION_DOWN_UP) != 0) {
                 scanDirectionPreview.mirrorHorizontal(false);
             }
 
             if ((rotation & FontSettings.SCANDIRECTION_RIGHT_LEFT) != 0) {
-                scanDirectionPreview.mirror(PicturePane.MIRRORAXIS_VERTICAL);
+                scanDirectionPreview.mirror(FontSettings.MIRROR_VERTICAL);
             } 
         } else {
-            scanDirectionPreview.rotate(PicturePane.ROTATION_0);
-            scanDirectionPreview.mirror(PicturePane.MIRRORAXIS_NONE);
+            scanDirectionPreview.rotate(FontSettings.ROTATION_0);
+            scanDirectionPreview.mirror(FontSettings.MIRROR_NONE);
             
             if ((rotation & FontSettings.SCANDIRECTION_DOWN_UP) != 0) {
-                scanDirectionPreview.mirror(PicturePane.MIRRORAXIS_VERTICAL);
+                scanDirectionPreview.mirror(FontSettings.MIRROR_VERTICAL);
             }
 
             if ((rotation & FontSettings.SCANDIRECTION_RIGHT_LEFT) != 0) {
-                scanDirectionPreview.mirror(PicturePane.MIRRORAXIS_HORIZONTAL);
+                scanDirectionPreview.mirror(FontSettings.MIRROR_HORIZONTAL);
             } 
         }
         

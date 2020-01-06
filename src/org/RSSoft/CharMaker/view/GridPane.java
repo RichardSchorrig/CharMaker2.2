@@ -240,7 +240,8 @@ public class GridPane extends JPanel implements KeyListener
    */
   public void setGrid(DataGrid dGrid)
   {
-    this.grid.copy(dGrid);
+    dGrid.copyTo(this.grid);
+    //this.grid.copy(dGrid);
     this.previewGrid.changeGrid(grid.getXSize(), grid.getYSize());
     
     this.repaint();

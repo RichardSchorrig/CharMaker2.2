@@ -81,7 +81,7 @@ public class FontSettings implements Serializable {
   public int bits;
   
   public int scanDirection;
-  public boolean organizedInColunms;
+  public boolean organizedInColumns;
   public boolean invert;
   
   /**

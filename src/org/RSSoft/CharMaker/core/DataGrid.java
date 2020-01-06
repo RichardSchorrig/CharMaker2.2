@@ -389,7 +389,7 @@ public class DataGrid implements Serializable
   public DataGrid copy()
   {
     DataGrid newgrid = new DataGrid(0, 0);
-    newgrid.copy(this);
+    copyTo(newgrid);
     return newgrid;
   }
   
@@ -397,23 +397,38 @@ public class DataGrid implements Serializable
    * copies the entire grid
    * @param anotherGrid an allocated object where the data is pasted into
    */
-  public void copy(DataGrid anotherGrid)
+  public void copyTo(DataGrid anotherGrid)
   {
-    this.xSize = anotherGrid.xSize;
-    this.ySize = anotherGrid.ySize;
-    this.grid = new boolean[anotherGrid.xSize][anotherGrid.ySize];
-    int x = 0;
-    int y = 0;
-    for (boolean arr[] : anotherGrid.getArray())
-    {      
-      for (boolean b : arr)
-      {
-        this.grid[x][y] = b;
-        y += 1;
+//    this.xSize = anotherGrid.xSize;
+//    this.ySize = anotherGrid.ySize;
+//    this.grid = new boolean[anotherGrid.xSize][anotherGrid.ySize];
+//    int x = 0;
+//    int y = 0;
+//    for (boolean arr[] : anotherGrid.getArray())
+//    {      
+//      for (boolean b : arr)
+//      {
+//        this.grid[x][y] = b;
+//        y += 1;
+//      }
+//      y = 0;
+//      x += 1;
+//    }
+      try {
+        copy(anotherGrid, new GridArea(0, 0, xSize, ySize), false);
+      } catch (Exception ex) {
+          RSLogger.getLogger().log(Level.SEVERE, null, ex);
       }
-      y = 0;
-      x += 1;
-    }
+  }
+  
+  public void copyFrom(DataGrid anotherGrid)
+  {
+      this.changeGrid(anotherGrid.xSize, anotherGrid.ySize);
+      try {
+        paste(anotherGrid, 0, 0);
+      } catch (Exception ex) {          
+          RSLogger.getLogger().log(Level.SEVERE, null, ex);
+      }
   }
   
   /**
@@ -427,20 +442,75 @@ public class DataGrid implements Serializable
    */
   public void copy(DataGrid selection, int xOffset, int yOffset, boolean cut) throws Exception
   {
-    if (xOffset >= this.xSize || yOffset >= this.ySize)
-      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xOffset, yOffset, this.xSize-1, this.ySize-1));
+//    if (xOffset >= this.xSize || yOffset >= this.ySize)
+//      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xOffset, yOffset, this.xSize-1, this.ySize-1));
+//    
+//    int xEnd = selection.xSize + xOffset > xSize ? xSize - xOffset : selection.xSize;
+//    int yEnd = selection.ySize + yOffset > ySize ? ySize - yOffset : selection.ySize;    
+//    
+//    for (int x = 0; x < xEnd; x += 1)
+//    {
+//      for (int y = 0; y < yEnd; y += 1)
+//      {
+//        selection.grid[x][y] = grid[x + xOffset][y + yOffset];
+//        if (cut)
+//        {
+//          grid[x + xOffset][y + yOffset] = false;
+//        }
+//      }
+//    }
+      copy(selection, new GridArea(xOffset, yOffset), cut);
+  }
+  
+  /**
+   * copies the given area into the given grid, and cuts the area from this if wished for.
+   * @param selection the object the area is copied into. If the area has no end points, 
+   *        the area equals the size of <selection>. If end points are given, <selection>
+   *        is resized to hold the area
+   * @param area the area with absolute start and end points. The area is limited if
+   *        the size exceeds the dimension of this grid.
+   * @param cut set to true if the area of this grid should be removed.
+   * @throws Exception in case the area does not contain valid start and end points
+   */
+  public void copy(DataGrid selection, GridArea area, boolean cut) throws Exception
+  {
+    if (area.xOffset > this.xSize || area.yOffset > this.ySize 
+            || area.xEnd > this.xSize || area.yEnd > this.ySize)
+      throw new Exception(String.format("the dimension start %d, %d or end %d, %d is out of bounds (max %d, %d)",
+              area.xOffset, area.yOffset, area.xEnd, area.yEnd, this.xSize-1, this.ySize-1));
     
-    int xEnd = selection.xSize + xOffset > xSize ? xSize - xOffset : selection.xSize;
-    int yEnd = selection.ySize + yOffset > ySize ? ySize - yOffset : selection.ySize;    
+    if (area.xOffset < 0 || area.yOffset < 0) {
+        throw new Exception(String.format("start point < 0, values are %d, %d", area.xOffset, area.yOffset));
+    }
+    
+    int xEnd;
+    int yEnd;
+    
+    if (area.xEnd < 0 || area.yEnd < 0) {
+        xEnd = selection.xSize + area.xOffset > xSize ? xSize - area.xOffset : selection.xSize;
+        yEnd = selection.ySize + area.yOffset > ySize ? ySize - area.yOffset : selection.ySize;
+    } else {
+        xEnd = area.xEnd;
+        yEnd = area.yEnd;
+        
+        if (xEnd > xSize) {
+            xEnd = xSize;
+        }
+        if (yEnd > ySize) {
+            yEnd = ySize;
+        }
+        
+        selection.changeGrid(xEnd, yEnd);
+    }
     
     for (int x = 0; x < xEnd; x += 1)
     {
       for (int y = 0; y < yEnd; y += 1)
       {
-        selection.grid[x][y] = grid[x + xOffset][y + yOffset];
+        selection.grid[x][y] = grid[x + area.xOffset][y + area.yOffset];
         if (cut)
         {
-          grid[x + xOffset][y + yOffset] = false;
+          grid[x + area.xOffset][y + area.yOffset] = false;
         }
       }
     }
@@ -460,29 +530,33 @@ public class DataGrid implements Serializable
    */
   public DataGrid copy(int xStart, int yStart, int xEnd, int yEnd, boolean cut) throws Exception
   {
-    if (xStart >= this.xSize || yStart >= this.ySize)
-      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xStart, yStart, this.xSize-1, this.ySize-1));
-    if (xEnd >= this.xSize || yEnd >= this.ySize)
-      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xEnd, yEnd, this.xSize-1, this.ySize-1));
-    
-    if (xStart > xEnd)
-    {
-      int t = xEnd;
-      xEnd = xStart;
-      xStart = t;
-    }
-    if (yStart > yEnd)
-    {
-      int t = yEnd;
-      yEnd = yStart;
-      yStart = t;
-    }
-    
-    DataGrid selection = new DataGrid(xEnd - xStart + 1, yEnd - yStart + 1);
-    
-    copy(selection, xStart, yStart, cut);
-    
-    return selection;
+//    if (xStart >= this.xSize || yStart >= this.ySize)
+//      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xStart, yStart, this.xSize-1, this.ySize-1));
+//    if (xEnd >= this.xSize || yEnd >= this.ySize)
+//      throw new Exception(String.format("the dimension %d, %d is out of bounds (max %d, %d", xEnd, yEnd, this.xSize-1, this.ySize-1));
+//    
+//    if (xStart > xEnd)
+//    {
+//      int t = xEnd;
+//      xEnd = xStart;
+//      xStart = t;
+//    }
+//    if (yStart > yEnd)
+//    {
+//      int t = yEnd;
+//      yEnd = yStart;
+//      yStart = t;
+//    }
+//    
+//    DataGrid selection = new DataGrid(xEnd - xStart + 1, yEnd - yStart + 1);
+//    
+//    copy(selection, xStart, yStart, cut);
+//    
+//    return selection;
+      
+      DataGrid selection = new DataGrid(1, 1);
+      copy(selection, new GridArea(xStart, yStart, xEnd, yEnd), cut);
+      return selection;
   }
   
   public void manipulate(int rotation, boolean mirrorHorizontal, boolean mirrorVertical) throws Exception
@@ -514,7 +588,7 @@ public class DataGrid implements Serializable
       y += 1;
     }
     
-    copy(newGrid);
+    copyTo(newGrid);
   }
   
   public void rotate(int rotation) throws Exception
@@ -547,7 +621,7 @@ public class DataGrid implements Serializable
     }
     
     for (int i=0; i<nOfLines; i+=1) {
-      GridIteratorOffset offset = new GridIteratorOffset();
+      GridArea offset = new GridArea();
       offset.yOffset = 8*i;
       offset.yEnd = 8*i + 7;
       GridIterator it = new GridIterator(this, FontSettings.ROTATION_0, FontSettings.MIRROR_NONE, offset);
@@ -584,7 +658,7 @@ public class DataGrid implements Serializable
     int pos_arr = 0;
 
     for (int i=0; i<nOfLines; i+=1) {
-      GridIteratorOffset offset = new GridIteratorOffset();
+      GridArea offset = new GridArea();
       offset.yOffset = 8*i;
       offset.yEnd = 8*i + 7;
       GridIterator it = new GridIterator(this, FontSettings.ROTATION_0, FontSettings.MIRROR_NONE, offset);

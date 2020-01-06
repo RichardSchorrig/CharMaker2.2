@@ -67,7 +67,7 @@ public class ScanDirectionControl implements ActionListener {
          * the vertical (up, down) options set to 2 to have the horizontal
          * (left, right) options
          */
-        public void setScanDirectionSelection(int scanDirection) {
+        public final void setScanDirectionSelection(int scanDirection) {
             scanDirections.clear();
             
             switch (scanDirection) {
@@ -220,7 +220,7 @@ public class ScanDirectionControl implements ActionListener {
     public void updateFontSettings(FontSettings fontSettings)
     {
         fontSettings.scanDirection = getScanDirectionFromSelection();
-        fontSettings.organizedInColunms = organizedInColumns.isSelected();
+        fontSettings.organizedInColumns = organizedInColumns.isSelected();
     }
     
     private boolean bitsSet(int value, int bits)
@@ -289,13 +289,13 @@ public class ScanDirectionControl implements ActionListener {
     {
         int direction = 0;
         if (scanDirection1.getModel().getSelectedItem().equals(DIRECTION_UP_DOWN)) {
-            direction |= FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL | FontSettings.SCANDIRECTION_UP_DOWN;
+            direction |= FontSettings.SCANDIRECTION_VERTICAL_OVER_HORIZONTAL | FontSettings.SCANDIRECTION_UP_DOWN;
         } else if (scanDirection1.getModel().getSelectedItem().equals(DIRECTION_DOWN_UP)) {
-            direction |= FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL | FontSettings.SCANDIRECTION_DOWN_UP;
+            direction |= FontSettings.SCANDIRECTION_VERTICAL_OVER_HORIZONTAL | FontSettings.SCANDIRECTION_DOWN_UP;
         } else if (scanDirection1.getModel().getSelectedItem().equals(DIRECTION_LEFT_RIGHT)) {
-            direction |= FontSettings.SCANDIRECTION_VERTICAL_OVER_HORIZONTAL | FontSettings.SCANDIRECTION_LEFT_RIGHT;
+            direction |= FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL | FontSettings.SCANDIRECTION_LEFT_RIGHT;
         } else if (scanDirection1.getModel().getSelectedItem().equals(DIRECTION_RIGHT_LEFT)) {
-            direction |= FontSettings.SCANDIRECTION_VERTICAL_OVER_HORIZONTAL | FontSettings.SCANDIRECTION_RIGHT_LEFT;
+            direction |= FontSettings.SCANDIRECTION_HORIZONTAL_OVER_VERTICAL | FontSettings.SCANDIRECTION_RIGHT_LEFT;
         }
         
         if (scanDirection2.getModel().getSelectedItem().equals(DIRECTION_UP_DOWN)) {

@@ -65,7 +65,8 @@ public class CharacterDescriptor extends Observable implements Serializable
    */
   public void setGrid(DataGrid grid)
   {
-    this.characterGrid.copy(grid);
+    grid.copyTo(this.characterGrid);
+    //this.characterGrid.copyTo(grid);
     this.setChanged();
     this.notifyObservers();
   }
